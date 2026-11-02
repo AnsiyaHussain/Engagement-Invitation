@@ -27,10 +27,10 @@ export const INVITATION_CONFIG = {
 
   // --- Venue & Directions ---
   venueName: "Mankara Farms",
-  venueAddress: "Follow the Google Maps directions link below for exact location & route",
+  venueAddress: "Puthenchira PO, Near Thachapilly Bridge, Kombathukadavu, Thrissur, Kerala 680682",
   
   // Confirmed Google venue link provided by the couple
-  googleMapsUrl: "https://share.google/kkqEvfza5XU5Qf5yK",
+  googleMapsUrl: "https://www.google.com/maps/dir//Mankara+Farms,+Puthenchira+PO+Near+Thachapilly+Bridge+Kombathukadavu,+Kombathukadavu-Kodungallur+Rd,+Thrissur,+Keralam+680682/@10.2702703,76.2303966,14z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3b081de8c40016d1:0x61f652e8a4e5933f!2m2!1d76.229662!2d10.2419542?entry=ttu&g_ep=EgoyMDI2MTAyOC4wIKXMDSoASAFQAw%3D%3D",
 
   // --- Image Asset & Cute Top Caption ---
   portraitImageSrc: "./images/couple-portrait.jpg",
