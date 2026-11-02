@@ -188,23 +188,30 @@ export default function AnnouncementSection() {
             }}
           >
             {/* Full Uncropped Original Portrait */}
-            <motion.img
-              src={portraitImageSrc}
-              alt={`${brideName} & ${groomName}`}
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'contain',
-                display: 'block',
-              }}
-              initial={{ scale: 1.01 }}
-              animate={{ scale: [1.01, 1.03, 1.01] }}
-              transition={{
-                repeat: Infinity,
-                duration: 14,
-                ease: 'easeInOut',
-              }}
-            />
+            <picture>
+              <source srcSet="./images/couple-portrait.webp" type="image/webp" />
+              <motion.img
+                src="./images/couple-portrait.jpg"
+                alt={`${brideName} & ${groomName}`}
+                width="599"
+                height="1024"
+                loading="lazy"
+                decoding="async"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain',
+                  display: 'block',
+                }}
+                initial={{ scale: 1.01 }}
+                animate={{ scale: [1.01, 1.03, 1.01] }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 14,
+                  ease: 'easeInOut',
+                }}
+              />
+            </picture>
 
             {/* Subtle Warm Amber Vignette */}
             <div

@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import OpeningScreen from './components/OpeningScreen';
 import AnnouncementSection from './components/AnnouncementSection';
-import CountdownSection from './components/CountdownSection';
-import EventDetailsSection from './components/EventDetailsSection';
-import WishesSection from './components/WishesSection';
-import ClosingSection from './components/ClosingSection';
 import FloatingMusicPlayer from './components/FloatingMusicPlayer';
+
+// Production Code Splitting: Lazy-load below-the-fold sections
+const CountdownSection = lazy(() => import('./components/CountdownSection'));
+const EventDetailsSection = lazy(() => import('./components/EventDetailsSection'));
+const WishesSection = lazy(() => import('./components/WishesSection'));
+const ClosingSection = lazy(() => import('./components/ClosingSection'));
 
 export default function App() {
   const [isOpened, setIsOpened] = useState(false);
@@ -25,17 +27,13 @@ export default function App() {
         {/* Unified Ceremony Announcement & Couple Portrait (Single Screen Hero) */}
         <AnnouncementSection />
 
-        {/* Live IST Countdown */}
-        <CountdownSection />
-
-        {/* Event Details, Venue & Directions */}
-        <EventDetailsSection />
-
-        {/* Wishes from Visitors Guestbook */}
-        <WishesSection />
-
-        {/* Emotional Closing Screen */}
-        <ClosingSection />
+        {/* Below-the-fold sections with lightweight Suspense boundaries */}
+        <Suspense fallback={null}>
+          <CountdownSection />
+          <EventDetailsSection />
+          <WishesSection />
+          <ClosingSection />
+        </Suspense>
       </main>
     </div>
   );

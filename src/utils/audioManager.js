@@ -32,9 +32,11 @@ class RomanticAudioManager {
   initAudio(audioSrc) {
     if (this.audioElement) return;
 
-    this.audioElement = new Audio(audioSrc);
+    this.audioElement = new Audio();
+    this.audioElement.preload = 'none';
     this.audioElement.loop = true;
     this.audioElement.volume = this.volume;
+    this.audioElement.src = audioSrc;
 
     this.audioElement.addEventListener('error', () => {
       console.log('Audio file not found or failed to load. Switching seamlessly to Web Audio Romantic Synthesizer.');

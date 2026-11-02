@@ -84,6 +84,13 @@ body::before {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
+/* Disable heavy SVG fractal turbulence repainting on mobile */
+@media (max-width: 768px) {
+  body::before {
+    display: none;
+  }
+}
+
 /* Typography Utilities */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
@@ -183,12 +190,14 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   color: var(--color-espresso);
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 /* Glassmorphic Luxury Card */
 .luxury-card {
   background: var(--color-card-bg);
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: var(--radius-md);
   border: var(--border-gold-thin);
   box-shadow: var(--shadow-card);
@@ -196,6 +205,13 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   overflow: hidden;
   transition: var(--transition-smooth);
+}
+
+@media (max-width: 768px) {
+  .luxury-card {
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
 }
 
 .luxury-card::before {

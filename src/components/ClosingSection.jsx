@@ -36,18 +36,25 @@ export default function ClosingSection() {
             position: 'relative',
           }}
         >
-          <img
-            src="/images/wax-seal.jpg"
-            alt="Wax Seal Monogram"
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              borderRadius: '50%',
-              boxShadow: '0 6px 20px rgba(198, 163, 107, 0.35)',
-              border: '1px solid rgba(198, 163, 107, 0.5)',
-            }}
-          />
+          <picture>
+            <source srcSet="./images/wax-seal.webp" type="image/webp" />
+            <img
+              src="./images/wax-seal.jpg"
+              alt="Wax Seal Monogram"
+              width="64"
+              height="64"
+              loading="lazy"
+              decoding="async"
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                borderRadius: '50%',
+                boxShadow: '0 6px 20px rgba(198, 163, 107, 0.35)',
+                border: '1px solid rgba(198, 163, 107, 0.5)',
+              }}
+            />
+          </picture>
         </motion.div>
 
         {/* Emotion Closing Callout */}

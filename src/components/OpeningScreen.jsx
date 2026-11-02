@@ -152,18 +152,25 @@ export default function OpeningScreen({ onOpen }) {
               position: 'relative',
             }}
           >
-            <img
-              src="/images/wax-seal.jpg"
-              alt="Antique Gold Wax Seal"
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                borderRadius: '50%',
-                boxShadow: '0 8px 24px rgba(198, 163, 107, 0.45)',
-                border: '1px solid rgba(198, 163, 107, 0.6)'
-              }}
-            />
+            <picture>
+              <source srcSet="./images/wax-seal.webp" type="image/webp" />
+              <img
+                src="./images/wax-seal.jpg"
+                alt="Antique Gold Wax Seal"
+                width="84"
+                height="84"
+                fetchPriority="high"
+                decoding="async"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  borderRadius: '50%',
+                  boxShadow: '0 8px 24px rgba(198, 163, 107, 0.45)',
+                  border: '1px solid rgba(198, 163, 107, 0.6)'
+                }}
+              />
+            </picture>
             {/* Subtle rotating glow ring */}
             <motion.div
               animate={{ rotate: 360 }}

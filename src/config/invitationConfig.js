@@ -33,14 +33,14 @@ export const INVITATION_CONFIG = {
   googleMapsUrl: "https://share.google/kkqEvfza5XU5Qf5yK",
 
   // --- Image Asset & Cute Top Caption ---
-  portraitImageSrc: "/images/couple-portrait.jpg",
+  portraitImageSrc: "./images/couple-portrait.jpg",
   portraitTopCaption: "Yes, these kids are getting engaged!",
 
   // --- Music Configuration ---
   music: {
     trackTitle: "Romantic Piano Serenade",
     artist: "Acoustic Melody",
-    audioSrc: "/audio/romantic-ambient.mp3",
+    audioSrc: "./audio/romantic-ambient.mp3",
     defaultVolume: 0.28,
     useSynthesizedFallback: true // Built-in Web Audio API romantic chords
   },

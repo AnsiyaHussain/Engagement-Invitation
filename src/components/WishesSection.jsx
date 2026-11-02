@@ -1,7 +1,20 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Send, CheckCircle2, MessageSquareHeart, User, AlertCircle, Sparkles } from 'lucide-react';
-import confetti from 'canvas-confetti';
+
+const triggerCelebration = async (count = 50) => {
+  try {
+    const { default: confetti } = await import('canvas-confetti');
+    confetti({
+      particleCount: count,
+      spread: 60,
+      origin: { y: 0.8 },
+      colors: ['#C6A36B', '#DFCA9B', '#50372F', '#E8D8C6'],
+    });
+  } catch {
+    // Dynamic import fallback
+  }
+};
 
 export default function WishesSection() {
   const [wishes, setWishes] = useState([]);
@@ -100,12 +113,7 @@ export default function WishesSection() {
       }
 
       // Trigger delicate celebration confetti
-      confetti({
-        particleCount: 50,
-        spread: 60,
-        origin: { y: 0.8 },
-        colors: ['#C6A36B', '#DFCA9B', '#50372F', '#E8D8C6'],
-      });
+      triggerCelebration(50);
 
       setSuccessMsg(result.message || 'Thank you for your warm wishes and blessings!');
       setName('');
@@ -131,11 +139,7 @@ export default function WishesSection() {
       setWishes(updated);
       localStorage.setItem('engagement_wishes_backup', JSON.stringify(updated));
 
-      confetti({
-        particleCount: 40,
-        spread: 50,
-        colors: ['#C6A36B', '#DFCA9B', '#50372F'],
-      });
+      triggerCelebration(40);
 
       setSuccessMsg('Thank you for your warm wishes and blessings!');
       setName('');
