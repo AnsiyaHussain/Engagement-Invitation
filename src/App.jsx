@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import OpeningScreen from './components/OpeningScreen';
 import AnnouncementSection from './components/AnnouncementSection';
 import FloatingMusicPlayer from './components/FloatingMusicPlayer';
@@ -9,14 +9,10 @@ const WishesSection = lazy(() => import('./components/WishesSection'));
 const ClosingSection = lazy(() => import('./components/ClosingSection'));
 
 export default function App() {
-  const [isOpened, setIsOpened] = useState(false);
-
   return (
     <div className="invitation-app">
-      {/* Section 1: Opening Screen / A & N Monogram Reveal */}
-      {!isOpened && (
-        <OpeningScreen onOpen={() => setIsOpened(true)} />
-      )}
+      {/* Section 1: Opening Screen / S & N Monogram Reveal & Doors */}
+      <OpeningScreen />
 
       {/* Floating Circular Background Music Player */}
       <FloatingMusicPlayer />
