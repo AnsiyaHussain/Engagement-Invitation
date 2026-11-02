@@ -1,7 +1,5 @@
 import { motion } from 'framer-motion';
-import { Heart, Sparkles, Flower2 } from 'lucide-react';
 import { INVITATION_CONFIG } from '../config/invitationConfig';
-import PetalCanvas from './PetalCanvas';
 
 export default function ClosingSection() {
   const { closing, brideName, groomName } = INVITATION_CONFIG;
@@ -13,153 +11,100 @@ export default function ClosingSection() {
       style={{
         textAlign: 'center',
         position: 'relative',
-        backgroundColor: 'rgba(244, 236, 225, 0.45)',
-        borderTop: '1px solid rgba(198, 163, 107, 0.3)',
-        paddingBottom: '6rem',
-        overflow: 'hidden',
+        backgroundColor: 'var(--ivory)',
+        borderTop: '1px solid var(--line)',
+        paddingTop: '4.5rem',
+        paddingBottom: '5.5rem',
       }}
     >
-      {/* Subtle Petals Canvas Layer for romantic conclusion */}
-      <PetalCanvas count={12} speed={0.6} />
-
-      <div style={{ maxWidth: '480px', margin: '0 auto', position: 'relative', zIndex: 12 }}>
-        {/* Decorative Golden Crest */}
+      <div style={{ maxWidth: '540px', margin: '0 auto' }}>
+        {/* Paper Panel */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          style={{
-            width: '64px',
-            height: '64px',
-            margin: '0 auto 1.5rem',
-            position: 'relative',
-          }}
-        >
-          <picture>
-            <source srcSet="./images/wax-seal.webp" type="image/webp" />
-            <img
-              src="./images/wax-seal.jpg"
-              alt="Wax Seal Monogram"
-              width="64"
-              height="64"
-              loading="lazy"
-              decoding="async"
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                borderRadius: '50%',
-                boxShadow: '0 6px 20px rgba(198, 163, 107, 0.35)',
-                border: '1px solid rgba(198, 163, 107, 0.5)',
-              }}
-            />
-          </picture>
-        </motion.div>
-
-        {/* Emotion Closing Callout */}
-        <motion.h2
-          initial={{ opacity: 0, y: 15 }}
+          className="paper-panel"
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.1 }}
+          transition={{ duration: 0.8 }}
           style={{
-            fontFamily: 'var(--font-heading)',
-            fontSize: '1.85rem',
-            lineHeight: 1.3,
-            color: 'var(--color-espresso)',
-            marginBottom: '1rem',
+            border: '1px solid var(--line)',
+            backgroundColor: 'var(--paper)',
+            padding: '3rem 1.8rem 2.8rem',
+            textAlign: 'center',
           }}
         >
-          "{closing.title}"
-        </motion.h2>
+          {/* Header */}
+          <p
+            style={{
+              fontFamily: 'var(--font-body)',
+              fontSize: '0.72rem',
+              fontWeight: 400,
+              textTransform: 'uppercase',
+              letterSpacing: '0.22em',
+              color: 'var(--gold)',
+              marginBottom: '1.2rem',
+            }}
+          >
+            WITH LOVE & GRATITUDE
+          </p>
 
-        <div className="gold-divider" style={{ margin: '1.2rem auto' }}>
-          <Sparkles size={15} className="gold-divider-icon" />
-        </div>
-
-        {/* Couple Names */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          style={{ margin: '1.2rem 0' }}
-        >
-          <h3
+          {/* Couple Names */}
+          <h2
             style={{
               fontFamily: 'var(--font-serif)',
-              fontSize: '2.4rem',
-              fontWeight: 600,
-              color: 'var(--color-espresso)',
+              fontSize: 'clamp(2.4rem, 6.5vw, 3.2rem)',
+              fontWeight: 300,
+              color: 'var(--ink)',
               letterSpacing: '0.04em',
+              lineHeight: 1.15,
+              margin: '0 0 0.8rem',
             }}
           >
             <span>{brideName}</span>
             <span
               style={{
-                display: 'block',
-                fontFamily: 'var(--font-script)',
-                fontSize: '1.9rem',
-                color: 'var(--color-antique-gold)',
-                margin: '0.1rem 0',
-                fontWeight: 400,
+                fontStyle: 'italic',
+                color: 'var(--gold)',
+                margin: '0 0.4rem',
+                fontSize: '0.9em',
               }}
             >
               &
             </span>
             <span>{groomName}</span>
-          </h3>
-        </motion.div>
+          </h2>
 
-        {/* Final Date & Time Marker */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          style={{
-            display: 'inline-block',
-            margin: '1rem auto 1.5rem',
-            padding: '0.65rem 1.6rem',
-            borderRadius: '999px',
-            backgroundColor: 'rgba(255, 255, 255, 0.88)',
-            border: '1px solid rgba(198, 163, 107, 0.45)',
-            boxShadow: 'var(--shadow-subtle)',
-          }}
-        >
-          <span
+          <div className="hairline" style={{ maxWidth: '100px', margin: '1.4rem auto' }} />
+
+          {/* Date Summary */}
+          <p
             style={{
               fontFamily: 'var(--font-body)',
-              fontSize: '0.88rem',
-              fontWeight: 600,
-              letterSpacing: '0.08em',
-              color: 'var(--color-espresso)',
+              fontSize: '0.78rem',
+              textTransform: 'uppercase',
+              letterSpacing: '0.16em',
+              color: 'var(--gold)',
+              marginBottom: '1.2rem',
             }}
           >
             {closing.dateSummary}
-          </span>
+          </p>
+
+          {/* Personal Farewell */}
+          <p
+            style={{
+              fontFamily: 'var(--font-serif)',
+              fontStyle: 'italic',
+              fontWeight: 300,
+              fontSize: '1.08rem',
+              color: 'var(--ink)',
+              lineHeight: 1.7,
+              maxWidth: '380px',
+              margin: '0 auto',
+            }}
+          >
+            "{closing.farewell}"
+          </p>
         </motion.div>
-
-        <p
-          style={{
-            fontSize: '0.82rem',
-            color: 'var(--color-espresso-light)',
-            letterSpacing: '0.03em',
-            maxWidth: '320px',
-            margin: '0 auto',
-            lineHeight: 1.6,
-          }}
-        >
-          {closing.farewell}
-        </p>
-
-        {/* Heart icon finale */}
-        <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.4rem', opacity: 0.6 }}>
-          <span style={{ height: '1px', width: '30px', background: 'var(--color-antique-gold)' }} />
-          <Heart size={14} style={{ color: 'var(--color-antique-gold)', fill: 'var(--color-antique-gold)' }} />
-          <span style={{ height: '1px', width: '30px', background: 'var(--color-antique-gold)' }} />
-        </div>
       </div>
     </footer>
   );

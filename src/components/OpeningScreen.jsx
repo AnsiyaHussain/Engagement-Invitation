@@ -1,220 +1,182 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Heart } from 'lucide-react';
 import { INVITATION_CONFIG } from '../config/invitationConfig';
 import { audioManager } from '../utils/audioManager';
 
 export default function OpeningScreen({ onOpen }) {
   const [isOpening, setIsOpening] = useState(false);
 
-  const handleOpenClick = () => {
+  const handleOpen = () => {
     if (isOpening) return;
     setIsOpening(true);
 
-    // Start background music strictly after user interaction
-    audioManager.play(INVITATION_CONFIG.music.audioSrc);
+    // Audio starts strictly after visitor taps to open
+    try {
+      audioManager.play(INVITATION_CONFIG.music.audioSrc);
+    } catch {
+      // Audio playback fallback
+    }
 
-    // Allow the opening animation to play smoothly before revealing main site
+    // Complete the 1.9s cubic-bezier door opening transition before unmounting
     setTimeout(() => {
       onOpen();
-    }, 1100);
+    }, 1950);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleOpen();
+    }
   };
 
   return (
-    <AnimatePresence>
+    <div
+      id="opening-screen-container"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Invitation opening screen for Ansiya and Nihal"
+      style={{
+        position: 'fixed',
+        inset: 0,
+        zIndex: 1000,
+        overflow: 'hidden',
+        backgroundColor: 'var(--ivory)',
+        cursor: isOpening ? 'default' : 'pointer',
+      }}
+      onClick={handleOpen}
+    >
+      {/* Left Paper Door Panel */}
       <motion.div
-        className="opening-screen-overlay"
-        initial={{ opacity: 1 }}
-        exit={{ opacity: 0, y: -40, filter: 'blur(8px)' }}
-        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-        style={{
-          position: 'fixed',
-          inset: 0,
-          zIndex: 1000,
-          backgroundColor: 'var(--color-warm-ivory)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '1.5rem',
-          backgroundImage: 'radial-gradient(circle at 50% 30%, rgba(255,255,255,0.9) 0%, rgba(248,243,237,0.95) 70%, #E8D8C6 100%)',
+        initial={false}
+        animate={isOpening ? { x: '-100%' } : { x: '0%' }}
+        transition={{
+          duration: 1.9,
+          ease: [0.77, 0, 0.175, 1],
         }}
-      >
-        <motion.div
-          className="opening-envelope-card"
-          initial={{ opacity: 0, scale: 0.95, y: 20 }}
-          animate={isOpening ? { scale: 1.05, opacity: 0, y: -60 } : { opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          style={{
-            maxWidth: '420px',
-            width: '100%',
-            textAlign: 'center',
-            backgroundColor: 'rgba(255, 255, 255, 0.92)',
-            backdropFilter: 'blur(16px)',
-            borderRadius: '24px',
-            border: '1px solid rgba(198, 163, 107, 0.45)',
-            boxShadow: '0 20px 60px rgba(80, 55, 47, 0.12), 0 0 0 1px rgba(198, 163, 107, 0.15)',
-            padding: '3rem 2rem 2.8rem',
-            position: 'relative',
-          }}
-        >
-          {/* Decorative Corner Filigrees */}
-          <div style={{ position: 'absolute', top: '14px', left: '16px', color: 'var(--color-antique-gold)', opacity: 0.5, fontSize: '1.2rem' }}>✦</div>
-          <div style={{ position: 'absolute', top: '14px', right: '16px', color: 'var(--color-antique-gold)', opacity: 0.5, fontSize: '1.2rem' }}>✦</div>
-          <div style={{ position: 'absolute', bottom: '14px', left: '16px', color: 'var(--color-antique-gold)', opacity: 0.5, fontSize: '1.2rem' }}>✦</div>
-          <div style={{ position: 'absolute', bottom: '14px', right: '16px', color: 'var(--color-antique-gold)', opacity: 0.5, fontSize: '1.2rem' }}>✦</div>
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '50.5%', // 0.5% overlap prevents hairline gap on mobile sub-pixel rendering
+          height: '100%',
+          backgroundColor: 'var(--paper)',
+          borderRight: '1px solid var(--line)',
+          zIndex: 10,
+        }}
+      />
 
-          {/* Subtitle Header */}
+      {/* Right Paper Door Panel */}
+      <motion.div
+        initial={false}
+        animate={isOpening ? { x: '100%' } : { x: '0%' }}
+        transition={{
+          duration: 1.9,
+          ease: [0.77, 0, 0.175, 1],
+        }}
+        style={{
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          width: '50.5%',
+          height: '100%',
+          backgroundColor: 'var(--paper)',
+          borderLeft: '1px solid var(--line)',
+          zIndex: 10,
+        }}
+      />
+
+      {/* Centred 132px Gold Outlined Circle with A & N Monogram */}
+      <AnimatePresence>
+        {!isOpening && (
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            style={{ marginBottom: '1.25rem' }}
-          >
-            <span
-              style={{
-                fontFamily: 'var(--font-body)',
-                fontSize: '0.8rem',
-                textTransform: 'uppercase',
-                letterSpacing: '0.22em',
-                color: 'var(--color-espresso-light)',
-                fontWeight: 500,
-                display: 'inline-block'
-              }}
-            >
-              Engagement Invitation
-            </span>
-            <div className="gold-divider" style={{ margin: '0.8rem auto', maxWidth: '140px' }}>
-              <Heart size={14} className="gold-divider-icon" />
-            </div>
-          </motion.div>
-
-          {/* Core Opening Text */}
-          <motion.h2
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.35, duration: 0.7 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.45, ease: 'easeOut' } }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
             style={{
-              fontFamily: 'var(--font-heading)',
-              fontSize: '1.65rem',
-              fontWeight: 400,
-              lineHeight: 1.35,
-              color: 'var(--color-espresso)',
-              marginBottom: '1rem',
-              fontStyle: 'italic'
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              zIndex: 30,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
             }}
           >
-            "{INVITATION_CONFIG.subTitle}"
-          </motion.h2>
-
-          {/* Couple's Names as Editable Placeholders */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.5, duration: 0.7 }}
-            style={{ margin: '1.4rem 0 2rem' }}
-          >
-            <h1
+            {/* 132px Gold Outlined Circle */}
+            <div
+              className="breathing-monogram"
+              role="button"
+              tabIndex={0}
+              onKeyDown={handleKeyDown}
+              aria-label="A & N Monogram. Tap to open invitation"
               style={{
-                fontFamily: 'var(--font-serif)',
-                fontSize: '2.25rem',
-                fontWeight: 600,
-                letterSpacing: '0.04em',
-                lineHeight: 1.2,
-                color: 'var(--color-espresso)',
+                width: '132px',
+                height: '132px',
+                borderRadius: '50%',
+                border: '1px solid var(--gold)',
+                backgroundColor: 'var(--paper)',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                userSelect: 'none',
               }}
             >
-              <span>{INVITATION_CONFIG.brideName}</span>
-              <span
+              {/* Monogram Letters */}
+              <div
                 style={{
-                  display: 'block',
-                  fontFamily: 'var(--font-script)',
-                  fontSize: '1.85rem',
-                  color: 'var(--color-antique-gold)',
-                  margin: '0.1rem 0',
-                  fontWeight: 400
+                  fontFamily: 'var(--font-serif)',
+                  fontSize: '2.3rem',
+                  fontWeight: 300,
+                  color: 'var(--ink)',
+                  lineHeight: 1,
+                  letterSpacing: '0.06em',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}
               >
-                &
-              </span>
-              <span>{INVITATION_CONFIG.groomName}</span>
-            </h1>
-          </motion.div>
+                <span>A</span>
+                <span
+                  style={{
+                    color: 'var(--gold)',
+                    fontStyle: 'italic',
+                    fontFamily: 'var(--font-serif)',
+                    fontWeight: 300,
+                    fontSize: '1.9rem',
+                    margin: '0 0.2rem',
+                  }}
+                >
+                  &
+                </span>
+                <span>N</span>
+              </div>
+            </div>
 
-          {/* Luxury Wax Seal Accent */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.65, duration: 0.6 }}
-            style={{
-              width: '84px',
-              height: '84px',
-              margin: '0 auto 2.2rem',
-              position: 'relative',
-            }}
-          >
-            <picture>
-              <source srcSet="./images/wax-seal.webp" type="image/webp" />
-              <img
-                src="./images/wax-seal.jpg"
-                alt="Antique Gold Wax Seal"
-                width="84"
-                height="84"
-                fetchPriority="high"
-                decoding="async"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  borderRadius: '50%',
-                  boxShadow: '0 8px 24px rgba(198, 163, 107, 0.45)',
-                  border: '1px solid rgba(198, 163, 107, 0.6)'
-                }}
-              />
-            </picture>
-            {/* Subtle rotating glow ring */}
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ repeat: Infinity, duration: 25, ease: 'linear' }}
+            {/* Small TAP TO OPEN prompt text */}
+            <motion.p
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
               style={{
-                position: 'absolute',
-                inset: -6,
-                borderRadius: '50%',
-                border: '1px dashed rgba(198, 163, 107, 0.4)',
-                pointerEvents: 'none'
+                fontFamily: 'var(--font-body)',
+                fontSize: '0.68rem',
+                textTransform: 'uppercase',
+                letterSpacing: '0.24em',
+                color: 'var(--ink)',
+                marginTop: '1.4rem',
+                fontWeight: 400,
               }}
-            />
+            >
+              TAP TO OPEN
+            </motion.p>
           </motion.div>
-
-          {/* Open Invitation Button */}
-          <motion.button
-            id="open-invitation-btn"
-            onClick={handleOpenClick}
-            disabled={isOpening}
-            className="btn-luxury"
-            style={{ width: '100%', position: 'relative', overflow: 'hidden' }}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.6 }}
-          >
-            <Sparkles size={16} style={{ color: 'var(--color-antique-gold)' }} />
-            <span>{isOpening ? 'Unfolding Invitation...' : 'Open Our Invitation'}</span>
-          </motion.button>
-
-          <p
-            style={{
-              fontSize: '0.75rem',
-              color: 'var(--color-espresso-light)',
-              marginTop: '1.2rem',
-              letterSpacing: '0.04em',
-              opacity: 0.8
-            }}
-          >
-            Tap to open & play music
-          </p>
-        </motion.div>
-      </motion.div>
-    </AnimatePresence>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }
