@@ -6,6 +6,11 @@
  * Edit names, families, verses, date, venue and links here.
  */
 
+const MUSIC_TRACK = {
+  title: "Romantic Piano Serenade",
+  src: `${import.meta.env.BASE_URL}audio/music-1.mp3`,
+};
+
 export const INVITATION_CONFIG = {
   // --- Couple Details ---
   brideName: "Ansiya Hussain",     // full name (used in the families section)
@@ -16,8 +21,8 @@ export const INVITATION_CONFIG = {
 
   // --- Event Details ---
   eventTitle: "Engagement Ceremony",
-  blessingHeader: "With Allah's Blessings",
-  invitationLines: ["Insha\u2019Allah, you are warmly invited", "to celebrate their engagement"],
+  blessingHeader: "With the blessings of our families",
+  invitationLines: ["We warmly invite you to celebrate our ", "engagement"],
 
   // Prominent heartfelt invitation message
   personalMessage: "Your presence and duas will make this special occasion even more beautiful.",
@@ -78,10 +83,9 @@ export const INVITATION_CONFIG = {
 
   // --- Music Configuration ---
   music: {
-    tracks: [
-      { title: "Romantic Piano Serenade", src: "./audio/music-1.mp3" },
-     
-    ],
+    tracks: [MUSIC_TRACK],
+    audioSrc: MUSIC_TRACK.src,
+    trackTitle: MUSIC_TRACK.title,
     defaultVolume: 0.28,
   },
 

@@ -16,14 +16,9 @@ export default function OpeningScreen() {
 
   const handleOpen = () => {
     if (isOpen) return;
-    setIsOpen(true);
 
-    // If site has background music, start it inside tap handler (user gesture), never before
-    try {
-      audioManager.play();
-    } catch {
-      // Audio autoplay fallback
-    }
+    audioManager.play(INVITATION_CONFIG.music.audioSrc);
+    setIsOpen(true);
 
     // Unlock body scrolling and trigger orchestrated reveal
     document.body.classList.remove('locked');

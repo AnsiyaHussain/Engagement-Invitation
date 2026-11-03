@@ -181,7 +181,7 @@ export default function WishesSection() {
               marginBottom: '0.8rem',
             }}
           >
-            Your Duas
+            wishes
           </p>
 
           <h2
@@ -210,7 +210,7 @@ export default function WishesSection() {
               opacity: 0.85,
             }}
           >
-            Your duas and good wishes will forever be a cherished part of our beginning.
+            Your good wishes will forever be a cherished part of our beginning.
           </p>
 
           <p className="ar dua-ar" lang="ar" dir="rtl">{INVITATION_CONFIG.blessingDua.arabic}</p>
@@ -320,7 +320,7 @@ export default function WishesSection() {
                     color: 'var(--ink)',
                   }}
                 >
-                  Your Dua & Wishes
+                  Your Wishes
                 </label>
                 <span style={{ fontSize: '0.7rem', color: 'var(--ink)', opacity: 0.6 }}>
                   {message.length}/{MAX_CHARS}
@@ -329,7 +329,7 @@ export default function WishesSection() {
               <textarea
                 id="guest-message-input"
                 rows={4}
-                placeholder="Write your dua or good wishes..."
+                placeholder="Write your wishes..."
                 value={message}
                 onChange={e => setMessage(e.target.value)}
                 maxLength={MAX_CHARS}
