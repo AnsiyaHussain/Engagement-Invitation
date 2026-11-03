@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { INVITATION_CONFIG } from '../config/invitationConfig';
 
 const triggerCelebration = async (count = 35) => {
   try {
@@ -75,7 +76,7 @@ export default function WishesSection() {
       return;
     }
     if (!message.trim() || message.trim().length < 5) {
-      setErrorMsg('Please write a heartfelt message (at least 5 characters).');
+      setErrorMsg('Please write your wishes (at least 5 characters).');
       return;
     }
     if (message.trim().length > MAX_CHARS) {
@@ -106,7 +107,7 @@ export default function WishesSection() {
       }
 
       triggerCelebration(35);
-      setSuccessMsg(result.message || 'Thank you for your blessings and warm wishes!');
+      setSuccessMsg(result.message || 'Jazakallahu khairan for your duas and warm wishes!');
       setName('');
       setMessage('');
       setRelation('Well-wisher');
@@ -130,7 +131,7 @@ export default function WishesSection() {
       localStorage.setItem('engagement_wishes_backup', JSON.stringify(updated));
 
       triggerCelebration(25);
-      setSuccessMsg('Thank you for signing our guestbook with your blessings!');
+      setSuccessMsg('Jazakallahu khairan for signing our guestbook!');
       setName('');
       setMessage('');
       setRelation('Well-wisher');
@@ -180,7 +181,7 @@ export default function WishesSection() {
               marginBottom: '0.8rem',
             }}
           >
-            GUESTBOOK OF BLESSINGS
+            Your Duas
           </p>
 
           <h2
@@ -193,7 +194,7 @@ export default function WishesSection() {
               marginBottom: '0.6rem',
             }}
           >
-            Leave Your Blessings
+            Send Your Wishes
           </h2>
 
           <div className="hairline" style={{ maxWidth: '80px', margin: '1rem auto 1.8rem' }} />
@@ -205,12 +206,15 @@ export default function WishesSection() {
               color: 'var(--ink)',
               lineHeight: 1.6,
               maxWidth: '380px',
-              margin: '0 auto 2.2rem',
+              margin: '0 auto 1.6rem',
               opacity: 0.85,
             }}
           >
-            Your presence and words will forever be a cherished part of our beginning.
+            Your duas and good wishes will forever be a cherished part of our beginning.
           </p>
+
+          <p className="ar dua-ar" lang="ar" dir="rtl">{INVITATION_CONFIG.blessingDua.arabic}</p>
+          <p className="verse-en dua-en">{INVITATION_CONFIG.blessingDua.english}</p>
 
           {/* Form */}
           <form onSubmit={handleSubmit} style={{ textAlign: 'left' }}>
@@ -316,7 +320,7 @@ export default function WishesSection() {
                     color: 'var(--ink)',
                   }}
                 >
-                  Personal Blessing
+                  Your Dua & Wishes
                 </label>
                 <span style={{ fontSize: '0.7rem', color: 'var(--ink)', opacity: 0.6 }}>
                   {message.length}/{MAX_CHARS}
@@ -325,7 +329,7 @@ export default function WishesSection() {
               <textarea
                 id="guest-message-input"
                 rows={4}
-                placeholder="Write your heartfelt blessing..."
+                placeholder="Write your dua or good wishes..."
                 value={message}
                 onChange={e => setMessage(e.target.value)}
                 maxLength={MAX_CHARS}
@@ -386,7 +390,7 @@ export default function WishesSection() {
               className="btn-outlined"
               style={{ width: '100%', justifyContent: 'center' }}
             >
-              {isSubmitting ? 'Recording Blessing...' : 'Sign Guestbook'}
+              {isSubmitting ? 'Sending...' : 'Send Wishes'}
             </button>
           </form>
         </motion.div>
@@ -404,7 +408,7 @@ export default function WishesSection() {
                 marginBottom: '1.5rem',
               }}
             >
-              WORDS OF LOVE ({wishes.length})
+              Duas & Wishes ({wishes.length})
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>

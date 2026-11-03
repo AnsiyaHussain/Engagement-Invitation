@@ -20,7 +20,7 @@ export default function OpeningScreen() {
 
     // If site has background music, start it inside tap handler (user gesture), never before
     try {
-      audioManager.play(INVITATION_CONFIG.music.audioSrc);
+      audioManager.play();
     } catch {
       // Audio autoplay fallback
     }
@@ -55,8 +55,15 @@ export default function OpeningScreen() {
           aria-label="Open the invitation"
           onClick={handleOpen}
         >
+          <div className="ar bis" lang="ar" dir="rtl">
+            {INVITATION_CONFIG.bismillah.arabic}
+          </div>
           <div className="ring">
-            <span>A<i>&amp;</i>N</span>
+            <span>
+              {INVITATION_CONFIG.monogramBride}
+              <i>&amp;</i>
+              {INVITATION_CONFIG.monogramGroom}
+            </span>
           </div>
           <div className="tap">Tap to open</div>
         </button>

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Play, Pause, Volume2, VolumeX, SlidersHorizontal } from 'lucide-react';
 import { audioManager } from '../utils/audioManager';
-import { INVITATION_CONFIG } from '../config/invitationConfig';
 
 export default function FloatingMusicPlayer() {
   const [audioState, setAudioState] = useState({
@@ -10,6 +9,8 @@ export default function FloatingMusicPlayer() {
     isMuted: audioManager.isMuted,
     volume: audioManager.volume,
     mode: audioManager.mode,
+    volumeSupported: audioManager.volumeSupported,
+    title: audioManager.title,
   });
   const [showControls, setShowControls] = useState(false);
 
@@ -21,7 +22,7 @@ export default function FloatingMusicPlayer() {
   }, []);
 
   const handleTogglePlay = () => {
-    audioManager.toggle(INVITATION_CONFIG.music.audioSrc);
+    audioManager.toggle();
   };
 
   const handleToggleMute = (e) => {
@@ -86,10 +87,10 @@ export default function FloatingMusicPlayer() {
                 textOverflow: 'ellipsis',
               }}
             >
-              {INVITATION_CONFIG.music.trackTitle}
+              {audioState.title}
             </div>
 
-            {/* Volume Control */}
+            {/* Mute + Volume (the slider is hidden on iPhone, where it cannot work) */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <button
                 type="button"
@@ -106,22 +107,24 @@ export default function FloatingMusicPlayer() {
               >
                 {audioState.isMuted ? <VolumeX size={15} /> : <Volume2 size={15} />}
               </button>
-              <input
-                type="range"
-                min="0"
-                max="1"
-                step="0.05"
-                value={audioState.volume}
-                onChange={handleVolumeChange}
-                style={{
-                  flex: 1,
-                  accentColor: 'var(--gold)',
-                  cursor: 'pointer',
-                  height: '2px',
-                  backgroundColor: 'var(--line)',
-                }}
-                aria-label="Volume slider"
-              />
+              {audioState.volumeSupported && (
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.05"
+                  value={audioState.volume}
+                  onChange={handleVolumeChange}
+                  style={{
+                    flex: 1,
+                    accentColor: 'var(--gold)',
+                    cursor: 'pointer',
+                    height: '2px',
+                    backgroundColor: 'var(--line)',
+                  }}
+                  aria-label="Volume slider"
+                />
+              )}
             </div>
           </motion.div>
         )}

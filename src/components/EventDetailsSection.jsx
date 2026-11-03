@@ -2,11 +2,11 @@ import { motion } from 'framer-motion';
 import { INVITATION_CONFIG } from '../config/invitationConfig';
 
 export default function EventDetailsSection() {
-  const { eventTitle, dateDisplay, timeDisplay, venueName, venueAddress, googleMapsUrl, brideName, groomName } = INVITATION_CONFIG;
+  const { eventTitle, dateDisplay, timeDisplay, venueName, venueAddress, googleMapsUrl, brideShortName, groomName } = INVITATION_CONFIG;
 
   // Generate Google Calendar Link for RSVP & 1-click sync
-  const gcalTitle = encodeURIComponent(`${eventTitle} - ${brideName} & ${groomName}`);
-  const gcalDetails = encodeURIComponent(`With the blessings of our families, we joyfully invite you to celebrate our ${eventTitle}.\n\nTime: ${timeDisplay}\nVenue: ${venueName}\nAddress: ${venueAddress}`);
+  const gcalTitle = encodeURIComponent(`${eventTitle} - ${brideShortName} & ${groomName}`);
+  const gcalDetails = encodeURIComponent(`With the blessings of Almighty Allah, you are warmly invited to the ${eventTitle} of ${brideShortName} & ${groomName}. Insha\u2019Allah.\n\nTime: ${timeDisplay}\nVenue: ${venueName}\nAddress: ${venueAddress}`);
   const gcalLocation = encodeURIComponent(`${venueName}, ${venueAddress}`);
   // 29 Nov 2026 5:00 PM IST is 20261129T113000Z to 20261129T133000Z
   const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${gcalTitle}&dates=20261129T113000Z/20261129T133000Z&details=${gcalDetails}&location=${gcalLocation}`;
@@ -49,7 +49,7 @@ export default function EventDetailsSection() {
               marginBottom: '1rem',
             }}
           >
-            CELEBRATION VENUE & DETAILS
+            The Venue
           </p>
 
           {/* Section Heading */}
@@ -111,7 +111,7 @@ export default function EventDetailsSection() {
                 color: 'var(--gold)',
               }}
             >
-              {timeDisplay} (IST)
+              {timeDisplay} &middot; IST
             </div>
           </div>
 

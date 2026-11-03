@@ -1,12 +1,13 @@
 # Engagement-Invitation
 
 > **Two Hearts, One Beautiful Beginning**  
-> An elegant, minimal, luxury editorial digital engagement invitation microsite for **Ansiya & Nihal**.
+> An elegant, minimal, luxury editorial digital engagement invitation microsite for **Ansiya (Ansiya Hussain) & Nihal**.
 
 ---
 
 ## 💍 Highlights & Features
 
+- **Islamic Opening**: Bismillah in Arabic (Amiri font) on the opening screen and hero, Surah Ar-Rum 30:21 after the hero, the families section (Nihal's grandparents listed before his parents), a dua in the wishes section, and Surah Al-Furqan 25:74 at the end, each with an English translation.
 - **A & N Monogram Opening Screen**: 132px gold outlined circle with a 4.5s breathing animation. When tapped, two paper-colored door panels open outward via a 1.9s cubic-bezier transition, starting background music and revealing the invitation.
 - **Pure Editorial Typography**: High-end minimalist design using *Cormorant Garamond* and *Jost* typography, fine gold hairlines, and negative space with zero image dependencies.
 - **Strict 5-Color Luxury Palette**: `--ivory: #F8F3ED`, `--paper: #FDFBF7`, `--ink: #4A3730`, `--gold: #A8833F`, `--line: #E6D9C3`.

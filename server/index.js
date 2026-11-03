@@ -138,7 +138,7 @@ app.post('/api/wishes', rateLimiter, (req, res) => {
     wish: newWish.status === 'approved' ? newWish : null,
     message: isFlagged
       ? "Thank you! Your wish has been submitted and will appear after a brief review."
-      : "Thank you for your warm wishes and blessings!"
+      : "Jazakallahu khairan for your duas and warm wishes!"
   });
 });
 
