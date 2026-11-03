@@ -1,32 +1,34 @@
 /* ==========================================================================
-   MINIMAL LUXURY EDITORIAL DESIGN SYSTEM
-   Palette (Strict): Ivory, Paper, Ink, Gold, Line
-   Typography: Cormorant Garamond & Jost
-   No pure white, no pure black, no gradients, no box shadows, no rounded pills
+   ROMANTIC KERALA ENGAGEMENT INVITATION DESIGN SYSTEM
+   Palette: Soft Blush Pink, Warm Ivory, Deep Burgundy/Wine, Champagne Gold
+   Typography: Cormorant Garamond, Jost & Amiri
    ========================================================================== */
 
 :root {
-  /* Strict 5-Color Palette */
-  --ivory: #F8F3ED;
-  --paper: #FDFBF7;
-  --ink: #4A3730;
-  --gold: #A8833F;
-  --line: #E6D9C3;
+  /* Color Palette */
+  --ivory: #FFF8F1;
+  --blush: #FBE4E4;
+  --wine: #7A1F3D;
+  --wine-dark: #641B36;
+  --burgundy: #842344;
+  --rose: #C8506E;
+  --rose-muted: #D96C91;
+  --gold: #B8893F;
+  --gold-champagne: #C49A50;
+  --gold-light: #E5C27A;
+  --ink: #4A2A30;
+  --text-muted: #73535A;
+  --line: rgba(184, 137, 63, 0.35);
 
   /* Typography */
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
-  --font-body: 'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --serif: "Cormorant Garamond", Georgia, serif;
-  --sans: "Jost", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --sans: "Jost", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --arabic: "Amiri", serif;
+  --font-serif: var(--serif);
+  --font-body: var(--sans);
+  --font-arabic: var(--arabic);
 
-  /* Border Widths */
-  --border-thin: 1px solid var(--line);
-  --border-gold: 1px solid var(--gold);
-  --border-ink: 1px solid var(--ink);
-
-  /* Transitions */
-  --transition-fast: all 0.25s ease;
-  --transition-door: transform 1.9s cubic-bezier(0.77, 0, 0.175, 1);
+  color-scheme: light;
 }
 
 /* Reset & Box Sizing */
@@ -36,23 +38,25 @@
   padding: 0;
 }
 
+html, body {
+  min-height: 100%;
+}
+
 html {
-  font-size: 16px;
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--ivory);
-  color: var(--ink);
 }
 
 body {
-  font-family: var(--font-body);
-  background-color: var(--ivory);
+  font-family: var(--sans);
+  font-weight: 300;
+  background: var(--ivory);
   color: var(--ink);
   line-height: 1.6;
   overflow-x: hidden;
   position: relative;
-  min-height: 100vh;
 }
 
 body.locked {
@@ -66,166 +70,84 @@ body.opened {
   height: auto;
 }
 
-/* Typography Defaults */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-serif);
-  font-weight: 400;
-  color: var(--ink);
-  letter-spacing: 0.02em;
-  line-height: 1.25;
+/* Dreamy Romantic Background with Soft Blush & Ivory Gradients */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(70% 45% at 85% 0%, rgba(244, 170, 185, 0.55), transparent 70%),
+    radial-gradient(60% 40% at 0% 100%, rgba(233, 194, 122, 0.45), transparent 70%),
+    radial-gradient(60% 40% at 100% 100%, rgba(244, 170, 185, 0.4), transparent 70%),
+    linear-gradient(180deg, #FFF8F1, #FDEBE6 60%, #FBE3D8);
+  pointer-events: none;
 }
 
-/* App Layout Container */
+/* Canvas for Falling Petals */
+#p {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Delicate Fixed Outer Frame with 4 Diamond Corner Studs */
+.frame {
+  position: fixed;
+  inset: 11px;
+  border: 1px solid rgba(184, 137, 63, 0.55);
+  box-shadow: inset 0 0 0 4px rgba(255, 248, 241, 0.0), inset 0 0 0 5px rgba(184, 137, 63, 0.18);
+  z-index: 4;
+  pointer-events: none;
+}
+.frame i {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  background: var(--gold);
+  transform: rotate(45deg);
+}
+.frame i:nth-child(1) { top: -4px; left: -4px; }
+.frame i:nth-child(2) { top: -4px; right: -4px; }
+.frame i:nth-child(3) { bottom: -4px; left: -4px; }
+.frame i:nth-child(4) { bottom: -4px; right: -4px; }
+
+/* App Layout */
 .invitation-app {
   width: 100%;
   max-width: 100%;
   margin: 0 auto;
-  overflow-x: hidden;
   position: relative;
-  background-color: var(--ivory);
+  z-index: 2;
 }
 
-@media (min-width: 768px) {
-  .invitation-app {
-    max-width: 680px;
-    border-left: 1px solid var(--line);
-    border-right: 1px solid var(--line);
-  }
+/* Navigation Indicator Dots */
+.nv {
+  position: fixed;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 25;
+  display: grid;
+  gap: 12px;
 }
-
-/* Content Container */
-.section-container {
-  padding: 4.5rem 1.5rem;
-  width: 100%;
-  position: relative;
-}
-
-@media (min-width: 480px) {
-  .section-container {
-    padding: 5.5rem 2.2rem;
-  }
-}
-
-/* Minimal Outlined Paper Panel */
-.paper-panel {
-  background-color: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: 0;
-  padding: 2.5rem 1.8rem;
-  position: relative;
-}
-
-@media (min-width: 480px) {
-  .paper-panel {
-    padding: 3.2rem 2.4rem;
-  }
-}
-
-/* Hairline Dividers */
-.hairline {
-  height: 1px;
-  background-color: var(--line);
-  border: none;
-  margin: 1.5rem auto;
-  width: 100%;
-  max-width: 160px;
-}
-
-.hairline-wide {
-  height: 1px;
-  background-color: var(--line);
-  border: none;
-  margin: 2rem auto;
-  width: 100%;
-  max-width: 280px;
-}
-
-.hairline-full {
-  height: 1px;
-  background-color: var(--line);
-  border: none;
-  margin: 1.5rem 0;
-  width: 100%;
-}
-
-/* Minimal Outlined Buttons (Square / Nearly Square, No Shadows, No Pills) */
-.btn-outlined {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  padding: 0.85rem 1.8rem;
-  border-radius: 0;
-  background-color: transparent;
-  color: var(--ink);
-  font-family: var(--font-body);
-  font-size: 0.78rem;
-  font-weight: 400;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  border: 1px solid var(--ink);
-  cursor: pointer;
-  transition: var(--transition-fast);
-  text-decoration: none;
-  touch-action: manipulation;
-  min-height: 44px;
-}
-
-.btn-outlined:hover {
-  background-color: var(--ink);
-  color: var(--paper);
-}
-
-.btn-outlined:focus-visible {
-  outline: 2px solid var(--gold);
-  outline-offset: 3px;
-}
-
-.btn-gold-outlined {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  padding: 0.85rem 1.8rem;
-  border-radius: 0;
-  background-color: transparent;
-  color: var(--gold);
-  font-family: var(--font-body);
-  font-size: 0.78rem;
-  font-weight: 400;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+.nv a {
+  width: 7px;
+  height: 7px;
   border: 1px solid var(--gold);
-  cursor: pointer;
-  transition: var(--transition-fast);
+  border-radius: 50%;
+  display: block;
+  transition: all 0.3s ease;
+  background: transparent;
   text-decoration: none;
-  touch-action: manipulation;
-  min-height: 44px;
 }
-
-.btn-gold-outlined:hover {
-  background-color: var(--gold);
-  color: var(--paper);
-}
-
-.btn-gold-outlined:focus-visible {
-  outline: 2px solid var(--gold);
-  outline-offset: 3px;
-}
-
-/* Clean Editorial Inputs */
-input, textarea {
-  font-family: var(--font-body);
-  color: var(--ink);
-  background-color: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: 0;
-  transition: var(--transition-fast);
-}
-
-input:focus, textarea:focus {
-  outline: none;
-  border-color: var(--gold);
+.nv a.c {
+  background: var(--gold);
+  box-shadow: 0 0 8px rgba(184, 137, 63, 0.6);
+  transform: scale(1.15);
 }
 
 /* ==========================================================================
@@ -234,7 +156,7 @@ input:focus, textarea:focus {
 .doors {
   position: fixed;
   inset: 0;
-  z-index: 1000;
+  z-index: 20;
   pointer-events: none;
 }
 .doors.active {
@@ -245,17 +167,17 @@ input:focus, textarea:focus {
   top: 0;
   bottom: 0;
   width: 50.2%;
-  background: var(--paper);
+  background: linear-gradient(160deg, #8C2748, #5E1630);
   transition: transform 1.9s cubic-bezier(0.77, 0, 0.18, 1);
   will-change: transform;
 }
 .door.l {
   left: 0;
-  border-right: 1px solid var(--line);
+  border-right: 1px solid var(--gold);
 }
 .door.r {
   right: 0;
-  border-left: 1px solid var(--line);
+  border-left: 1px solid var(--gold);
 }
 .doors.open .l {
   transform: translateX(-101%);
@@ -267,11 +189,11 @@ input:focus, textarea:focus {
 .seal {
   position: fixed;
   inset: 0;
-  z-index: 1001;
+  z-index: 21;
   display: grid;
   place-items: center;
-  background: var(--paper);
   transition: opacity 0.7s ease;
+  background: transparent;
 }
 .seal.gone {
   opacity: 0;
@@ -282,439 +204,610 @@ input:focus, textarea:focus {
   cursor: pointer;
   display: grid;
   justify-items: center;
-  gap: 28px;
-}
-.seal button:focus-visible {
-  outline: 1px solid var(--gold);
-  outline-offset: 6px;
-  border-radius: 4px;
+  gap: 24px;
 }
 .seal button:focus-visible .ring {
-  outline: 1px solid var(--gold);
+  outline: 1px solid #FFF;
   outline-offset: 6px;
 }
-.ring {
+.seal .seal-bis {
+  color: #F2D79B;
+  font-family: var(--arabic);
+  font-size: clamp(26px, 6vw, 32px);
+  line-height: 1.5;
+  text-align: center;
+}
+.seal .ring {
   width: 132px;
   height: 132px;
-  border: 1px solid var(--gold);
+  border: 1px solid #E5C27A;
   border-radius: 50%;
   display: grid;
   place-items: center;
-  background: var(--paper);
-  animation: breathe 4.5s ease-in-out infinite;
+  background: rgba(94, 22, 48, 0.45);
+  backdrop-filter: blur(5px);
+  animation: br 4.5s ease-in-out infinite;
 }
-.ring span {
+@keyframes br {
+  50% {
+    box-shadow: 0 0 0 14px rgba(229, 194, 122, 0.14);
+  }
+}
+.seal .ring-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: var(--serif);
-  font-size: 44px;
+  font-size: 40px;
   font-weight: 300;
+  color: #FBEFD6;
   letter-spacing: 0.06em;
-  color: var(--ink);
-  line-height: 1;
 }
-.ring i {
-  font-style: italic;
-  color: var(--gold);
-  padding: 0 0.08em;
+.seal .monogram-rings {
+  width: 30px;
+  height: 30px;
+  margin: 0 8px;
+  display: inline-block;
+  vertical-align: middle;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.35));
 }
-.seal .bis {
-  font-size: clamp(28px, 7.5vw, 34px);
+.seal .tap {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: #E5C27A;
+  padding-left: 0.34em;
+}
+
+/* ==========================================================================
+   PART 2: INVITATION PAGES & TYPOGRAPHY
+   ========================================================================== */
+.pages-scroll-container {
+  width: 100%;
+}
+
+.page {
+  position: relative;
+  z-index: 2;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: calc(36px + env(safe-area-inset-top)) 28px calc(36px + env(safe-area-inset-bottom));
+}
+
+.ar {
+  font-family: var(--arabic);
+  direction: rtl;
+  letter-spacing: 0 !important;
+  color: var(--wine);
+}
+
+.lb {
+  font-size: 10.5px;
+  letter-spacing: 0.32em;
+  padding-left: 0.32em;
+  text-transform: uppercase;
   color: var(--gold);
+  text-wrap: balance;
+  font-family: var(--sans);
+  font-weight: 400;
+}
+
+.rule {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 2svh auto;
+}
+
+/* Page 1: Hero Announcement */
+.bis {
+  font-size: clamp(28px, 4.6svh, 40px);
   line-height: 1.5;
 }
-.tap {
-  font-family: var(--sans);
-  font-size: 11px;
-  letter-spacing: 0.38em;
-  text-transform: uppercase;
-  color: var(--gold);
-  padding-left: 0.38em;
-  text-align: center;
-}
-@keyframes breathe {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(168, 131, 63, 0);
-  }
-  50% {
-    box-shadow: 0 0 0 14px rgba(168, 131, 63, 0.08);
-  }
-}
-
-/* ==========================================================================
-   PART 2: HERO & OPENING NAME ANIMATION
-   ========================================================================== */
-.hero {
-  min-height: 100svh;
-  display: grid;
-  place-items: center;
-  text-align: center;
-  padding: max(48px, env(safe-area-inset-top)) 24px max(48px, env(safe-area-inset-bottom));
-  background-color: var(--ivory);
-}
-.stack {
-  display: grid;
-  justify-items: center;
-  max-width: 560px;
-  width: 100%;
-  margin: 0 auto;
-}
-.blessing {
-  font-family: var(--sans);
-  font-size: 11px;
-  letter-spacing: 0.3em;
-  padding-left: 0.3em;
-  text-transform: uppercase;
-  color: var(--gold);
-  text-wrap: balance;
-  text-align: center;
-}
-.blessing-spacer {
-  height: 36px;
-}
-.name {
-  font-family: var(--serif);
-  font-weight: 300;
-  font-size: clamp(64px, 19vw, 128px);
-  line-height: 0.98;
-  letter-spacing: 0.02em;
-  color: var(--ink);
-  text-align: center;
-  white-space: nowrap;
-}
-.name .ch {
-  display: inline-block;
-  opacity: 0;
-  filter: blur(10px);
-  transform: translateY(0.18em);
-  transition: opacity 1.2s ease, filter 1.2s ease, transform 1.2s cubic-bezier(0.2, 0.7, 0.2, 1);
-  will-change: opacity, filter, transform;
-}
-.and {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 300;
-  font-size: clamp(26px, 6vw, 36px);
-  color: var(--gold);
-  margin: 10px 0;
-  line-height: 1.2;
-}
-.rule {
-  width: 1px;
-  height: 0;
-  background: var(--gold);
-  margin: 44px auto;
-  transition: height 1.6s ease;
-}
-.invite {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 300;
-  font-size: clamp(20px, 4.6vw, 26px);
-  line-height: 1.55;
-  color: var(--ink);
-}
-.date {
-  margin-top: 36px;
-  font-family: var(--serif);
-  font-size: clamp(22px, 5vw, 28px);
-  font-weight: 400;
-  letter-spacing: 0.14em;
-  color: var(--ink);
-}
-.time {
-  margin-top: 6px;
-  font-family: var(--sans);
-  font-size: 12px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--ink);
-  opacity: 0.75;
-}
-.count-fade {
-  width: 100%;
-  margin-top: 48px;
-}
-.time-venue {
-  margin-top: 4px;
-}
-
-/* Single Orchestrated Reveal via body.go */
-.fade {
-  opacity: 0;
-  transition: opacity 1.4s ease;
-}
-body.go .fade {
-  opacity: 1;
-}
-body.go .bis-hero {
-  transition-delay: 0.9s;
-}
-body.go .bis-en {
-  transition-delay: 1.1s;
-}
-body.go .blessing {
-  transition-delay: 1.3s;
-}
-body.go .and {
-  transition-delay: 2.6s;
-}
-body.go .rule {
-  height: 56px;
-  transition: height 1.6s ease 3.6s;
-}
-body.go .invite {
-  transition-delay: 4.1s;
-}
-body.go .date {
-  transition-delay: 4.5s;
-}
-body.go .time {
-  transition-delay: 4.8s;
-}
-body.go .time-venue {
-  transition-delay: 4.9s;
-}
-body.go .count-fade {
-  transition-delay: 5.2s;
-}
-
-body.go .name .ch {
-  opacity: 1;
-  filter: blur(0px);
-  transform: translateY(0);
-}
-
-/* Accessibility / Reduced Motion */
-@media (prefers-reduced-motion: reduce) {
-  .door, .fade, .rule, .seal, .name .ch {
-    transition-duration: 0.01s !important;
-    transition-delay: 0s !important;
-  }
-  .ring {
-    animation: none !important;
-  }
-  .rule {
-    height: 56px !important;
-  }
-  .name .ch {
-    opacity: 1 !important;
-    filter: none !important;
-    transform: none !important;
-    transition: none !important;
-  }
-  .fade {
-    opacity: 1 !important;
-  }
-}
-
-
-/* ==========================================================================
-   ARABIC / ISLAMIC TEXT
-   Never apply letter-spacing to Arabic: it breaks the joined letters.
-   ========================================================================== */
-.ar {
-  font-family: 'Amiri', 'Scheherazade New', 'Noto Naskh Arabic', serif;
-  direction: rtl;
-  font-weight: 400;
-  letter-spacing: 0 !important;
-  text-transform: none !important;
-  color: var(--ink);
-  text-align: center;
-}
-.bis {
-  font-size: clamp(30px, 8vw, 44px);
-  line-height: 1.6;
-}
-.ref {
-  font-family: var(--sans);
-  font-size: 10px;
-  letter-spacing: 0.3em;
-  padding-left: 0.3em;
-  text-transform: uppercase;
-  color: var(--gold);
-  text-align: center;
-  line-height: 1.9;
-}
-.bis-en {
-  max-width: 320px;
-  margin-top: 4px;
-  text-wrap: balance;
-}
-.label-caps {
-  font-family: var(--sans);
-  font-size: 11px;
-  letter-spacing: 0.36em;
-  padding-left: 0.36em;
-  text-transform: uppercase;
-  color: var(--gold);
-  text-align: center;
-}
-.gold-rule {
-  width: 56px;
-  height: 1px;
-  background: var(--gold);
-  margin: 28px auto;
-}
-.gold-dot {
-  width: 6px;
-  height: 6px;
-  background: var(--gold);
-  transform: rotate(45deg);
-  margin: 26px auto;
-}
-
-/* Verse blocks */
-.verse-section, .families-section, .closing-section {
-  text-align: center;
-  background-color: var(--ivory);
-}
-.verse-section { padding-top: 7.5rem; padding-bottom: 7.5rem; }
-.verse-wrap, .families-wrap {
-  max-width: 540px;
-  margin: 0 auto;
-  display: grid;
-  justify-items: center;
-}
-.verse-ar {
-  font-size: clamp(26px, 6.6vw, 36px);
-  line-height: 2.15;
-}
-.verse-ar-sm {
-  font-size: clamp(24px, 6vw, 32px);
-}
-.verse-en {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 300;
-  font-size: clamp(19px, 4.4vw, 23px);
-  line-height: 1.7;
-  letter-spacing: 0.02em;
-  color: var(--ink);
-  margin-bottom: 22px;
-  max-width: 460px;
-}
-
-/* Families */
-/* Families */
-.families-section { padding-top: 5rem; padding-bottom: 7rem; }
-.families-wrap .gold-rule { margin-bottom: 52px; }
-
-.fam {
-  display: grid;
-  justify-items: center;
-  width: 100%;
-}
-.fam-name {
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: clamp(32px, 8vw, 44px);
-  line-height: 1.15;
-  letter-spacing: 0.06em;
-  color: var(--ink);
-  margin-bottom: 20px;
-}
-.fam-rel {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 300;
-  font-size: 20px;
-  line-height: 1.2;
-  letter-spacing: 0.08em;
-  color: var(--gold);
-  margin-bottom: 14px;
-}
-.fam-people {
-  display: grid;
-  justify-items: center;
-  gap: 6px;
-}
-.fam-person {
-  font-family: var(--serif);
-  font-weight: 400;
-  font-size: clamp(21px, 5.4vw, 25px);
-  line-height: 1.35;
-  letter-spacing: 0.07em;
-  color: var(--ink);
-  text-align: center;
-  white-space: nowrap;
-}
-.fam-amp {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 300;
-  font-size: 20px;
-  line-height: 1;
-  color: var(--gold);
-}
-.families-wrap .gold-dot {
-  margin: 34px auto 30px;
-}
-.fam-between {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 300;
-  font-size: 38px;
-  color: var(--gold);
-  margin: 56px 0;
-  line-height: 1;
-}
-/* Wishes dua */
-.dua-ar {
-  font-size: 26px;
-  line-height: 2;
-  color: var(--gold);
-  margin: 0 auto 4px;
-}
-.dua-en {
-  font-size: 18px;
-  margin: 0 auto 2rem;
-}
-
-/* Closing */
-.closing-section {
-  border-top: 1px solid var(--line);
-  padding-top: 6rem;
-  padding-bottom: 7rem;
-}
-.closing-divider {
-  width: 1px;
-  height: 56px;
-  background: var(--gold);
-  margin: 36px auto 40px;
-}
-.closing-names {
-  font-family: var(--serif);
-  font-weight: 300;
-  font-size: clamp(2.6rem, 8vw, 3.6rem);
-  letter-spacing: 0.06em;
-  line-height: 1.15;
-  margin: 22px 0 14px;
-  text-align: center;
-}
-.closing-amp {
-  font-style: italic;
-  color: var(--gold);
-  margin: 0 0.35em;
-  font-size: 0.9em;
-}
-.closing-date {
-  font-family: var(--sans);
-  font-size: 12px;
+.en {
+  font-size: 9.5px;
   letter-spacing: 0.26em;
   padding-left: 0.26em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 26px;
+  margin-top: 2px;
+  font-family: var(--sans);
 }
-.closing-farewell {
+
+.nm {
+  font-family: var(--serif);
+  font-weight: 400;
+  color: var(--wine);
+  font-size: clamp(52px, min(18vw, 10svh), 98px);
+  line-height: 0.98;
+  letter-spacing: 0.02em;
+}
+.nm span.ch {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(0.18em);
+  transition: opacity 1.2s, filter 1.2s, transform 1.2s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+body.go .nm span.ch {
+  opacity: 1;
+  filter: none;
+  transform: none;
+}
+
+.and-rings {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1.2svh 0;
+}
+.hero-rings {
+  width: clamp(56px, 12vw, 70px);
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 2px 8px rgba(184, 137, 63, 0.15));
+}
+
+.inv {
   font-family: var(--serif);
   font-style: italic;
-  font-weight: 300;
-  font-size: 20px;
+  font-size: clamp(18px, 2.8svh, 23px);
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.dt {
+  font-family: var(--serif);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  font-size: clamp(20px, 3svh, 26px);
+  margin-top: 2.2svh;
+  color: var(--wine);
+}
+
+.tm {
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  margin-top: 0.8svh;
+  color: var(--ink);
+  opacity: 0.85;
+}
+
+/* Countdown */
+.cd {
+  display: flex;
+  gap: clamp(16px, 5.5vw, 32px);
+  margin-top: 2.8svh;
+  justify-content: center;
+}
+.cd div {
+  display: grid;
+  gap: 4px;
+  text-align: center;
+}
+.cd b {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(28px, 4.8svh, 40px);
+  line-height: 1;
+  color: var(--wine);
+}
+.cd small {
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: 0.28em;
+  padding-left: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* Scroll Hint */
+.hint {
+  margin-top: 2.4svh;
+  font-family: var(--sans);
+  font-size: 9.5px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--rose);
+  animation: bob 2.4s ease-in-out infinite;
+  text-decoration: none;
+}
+.hint::after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 24px;
+  background: var(--rose);
+  margin: 7px auto 0;
+}
+@keyframes bob {
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+/* Fade In Animation for Hero Elements */
+.f {
+  opacity: 0;
+  transition: opacity 1.4s ease var(--t, 0s);
+}
+body.go .f {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   PART 3: PAGE 2 — VERSE, FAMILIES & VENUE
+   ========================================================================== */
+.vs {
+  font-size: clamp(28px, 4.4svh, 38px);
   line-height: 1.7;
+  margin-top: -20px;
+}
+.ve {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(17px, 2.5svh, 20px);
+  margin-top: -4px;
+  color: var(--ink);
+}
+.rf {
+  font-family: var(--sans);
+  font-size: 9.5px;
+  letter-spacing: 0.28em;
+  padding-left: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 20px;
+  margin-bottom: 90px;
+}
+
+/* Families Two-Column Partitioned Layout (Side by Side on ALL screens including Phone) */
+.family-details-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  width: 100%;
+  max-width: 760px;
+  margin: 24px auto;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.bride-family,
+.groom-family {
+  min-width: 0;
+  width: 100%;
+  text-align: center;
+  padding: 10px 18px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.bride-family {
+  border-right: 1px solid #C49A50;
+}
+
+.bride-family h3,
+.groom-family h3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(18px, 2.5vw, 26px);
+  letter-spacing: 0.03em;
+  color: var(--wine);
+  line-height: 1.2;
+  margin: 0 0 2px 0;
+}
+
+.bride-family em,
+.groom-family em {
+  display: block;
+  font-family: var(--serif);
+  color: var(--rose);
+  font-size: clamp(12px, 1.5vw, 14.5px);
+  margin: 7px 0 2px 0;
+  font-style: italic;
+}
+
+.bride-family p,
+.groom-family p {
+  font-family: var(--serif);
+  font-size: clamp(13px, 1.8vw, 17px);
+  line-height: 1.38;
   letter-spacing: 0.02em;
-  max-width: 400px;
+  color: var(--ink);
+  font-weight: 400;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.bride-family p b,
+.groom-family p b {
+  font-weight: 400;
+  color: var(--gold);
+  font-style: italic;
+}
+
+/* Phone & Mobile Viewports (Side-by-Side Symmetrical Scaling) */
+@media (max-width: 600px) {
+  .family-details-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    margin: 18px auto 14px;
+    width: 100%;
+  }
+
+  .bride-family,
+  .groom-family {
+    padding: 6px 10px;
+  }
+
+  .bride-family {
+    border-right: 1px solid #C49A50 !important;
+    border-bottom: none !important;
+  }
+
+  .bride-family h3,
+  .groom-family h3 {
+    font-size: clamp(17px, 4.4vw, 21px);
+    line-height: 1.15;
+  }
+
+  .bride-family em,
+  .groom-family em {
+    font-size: clamp(11.5px, 3vw, 13px);
+    margin: 5px 0 2px 0;
+  }
+
+  .bride-family p,
+  .groom-family p {
+    font-size: clamp(12.5px, 3.3vw, 15px);
+    line-height: 1.32;
+  }
+}
+
+@media (max-width: 380px) {
+  .family-details-grid {
+    margin: 14px auto 10px;
+  }
+
+  .bride-family,
+  .groom-family {
+    padding: 4px 6px;
+  }
+
+  .bride-family h3,
+  .groom-family h3 {
+    font-size: 16px;
+  }
+
+  .bride-family em,
+  .groom-family em {
+    font-size: 11px;
+    margin: 4px 0 1px 0;
+  }
+
+  .bride-family p,
+  .groom-family p {
+    font-size: 12px;
+    line-height: 1.28;
+  }
+}
+
+/* Venue Section */
+.vn {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(23px, 3.4svh, 28px);
+  color: var(--wine);
+  letter-spacing: 0.06em;
+}
+.ad {
+  font-family: var(--sans);
+  font-size: 12.5px;
+  letter-spacing: 0.06em;
+  line-height: 1.7;
+  color: var(--ink);
+  opacity: 0.88;
+  margin-top: 4px;
+}
+
+/* Action Buttons */
+.bt {
+  display: flex;
+  gap: 12px;
+  margin-top: 2.6svh;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.b {
+  font: 400 10.5px var(--sans);
+  letter-spacing: 0.26em;
+  padding: 14px 22px 14px 24px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--wine);
+  color: var(--wine);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  border-radius: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.b.s {
+  background: var(--wine);
+  color: #FFF3E4;
+}
+.b:hover {
+  background: var(--rose);
+  border-color: var(--rose);
+  color: #FFF;
+}
+
+/* Sole Closing Blessing */
+.ft {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 17px;
+  margin-top: 2.6svh;
+  color: var(--wine);
+}
+
+/* ==========================================================================
+   PART 4: WISHES SHEET (BOTTOM MODAL)
+   ========================================================================== */
+.sh-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(100, 27, 54, 0.35);
+  backdrop-filter: blur(4px);
+  z-index: 29;
+}
+
+.sh {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+  background: #FFF9F5;
+  border-top: 1px solid var(--gold);
+  box-shadow: 0 -8px 30px rgba(100, 27, 54, 0.15);
+  padding: 28px 24px calc(28px + env(safe-area-inset-bottom));
+  transform: translateY(105%);
+  transition: transform 0.6s cubic-bezier(0.77, 0, 0.18, 1);
+  text-align: center;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+.sh.o {
+  transform: none;
+}
+.sh .x {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 28px;
+  background: none;
+  border: 0;
+  color: var(--wine);
+  cursor: pointer;
+  padding: 4px 8px;
+  line-height: 1;
+}
+
+.sh form {
+  display: grid;
+  gap: 18px;
+  max-width: 440px;
+  margin: 16px auto 0;
+  text-align: left;
+}
+.sh label {
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 4px;
+}
+.sh input, .sh textarea {
+  width: 100%;
+  font: 300 17px var(--serif);
+  color: var(--ink);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #E6D2B8;
+  padding: 6px 0;
+  resize: none;
+  border-radius: 0;
+  outline: none;
+  transition: border-color 0.25s ease;
+}
+.sh input:focus, .sh textarea:focus {
+  outline: 0;
+  border-color: var(--rose);
+}
+.th {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 19px;
+  color: var(--wine);
+  text-align: center;
+}
+
+.wishes-list-wrap {
+  max-width: 440px;
+  margin: 0 auto;
+}
+.wishes-scroll-box {
+  display: grid;
+  gap: 10px;
+  max-height: 180px;
+  overflow-y: auto;
+  text-align: left;
+}
+.wish-item-card {
+  padding: 10px 12px;
+  background: rgba(251, 228, 228, 0.35);
+  border-left: 2px solid var(--gold);
+}
+.wish-text {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14.5px;
+  color: var(--ink);
+  line-height: 1.4;
+}
+.wish-author {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--rose);
+  margin-top: 4px;
+}
+
+/* ==========================================================================
+   PART 5: RESPONSIVENESS & ACCESSIBILITY
+   ========================================================================== */
+@media (max-height: 700px) {
+  .hint { display: none; }
+  .rule { margin: 1.4svh auto; }
+  .cd { margin-top: 1.8svh; }
+}
+
+@media (max-width: 380px) {
+  .page {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .nm {
+    font-size: clamp(44px, 16vw, 68px);
+  }
+  .hero-rings {
+    width: 50px;
+  }
+  .cd {
+    gap: 12px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ref.fade, .bis-hero { opacity: 1 !important; }
+  .door, .f, .nm span.ch, .sh {
+    transition-duration: 0.01s !important;
+  }
+  .ring, .hint {
+    animation: none;
+  }
 }

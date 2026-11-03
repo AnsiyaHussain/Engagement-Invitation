@@ -6,7 +6,7 @@ export default function EventDetailsSection() {
 
   // Generate Google Calendar Link for RSVP & 1-click sync
   const gcalTitle = encodeURIComponent(`${eventTitle} - ${brideShortName} & ${groomName}`);
-  const gcalDetails = encodeURIComponent(`With the blessings of Almighty Allah, you are warmly invited to the ${eventTitle} of ${brideShortName} & ${groomName}. Insha\u2019Allah.\n\nTime: ${timeDisplay}\nVenue: ${venueName}\nAddress: ${venueAddress}`);
+  const gcalDetails = encodeURIComponent(`You are warmly invited to the ${eventTitle} of ${brideShortName} & ${groomName}.\n\nTime: ${timeDisplay}\nVenue: ${venueName}\nAddress: ${venueAddress}`);
   const gcalLocation = encodeURIComponent(`${venueName}, ${venueAddress}`);
   // 29 Nov 2026 5:00 PM IST is 20261129T113000Z to 20261129T133000Z
   const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${gcalTitle}&dates=20261129T113000Z/20261129T133000Z&details=${gcalDetails}&location=${gcalLocation}`;

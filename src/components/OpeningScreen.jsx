@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react';
 import { INVITATION_CONFIG } from '../config/invitationConfig';
 import { audioManager } from '../utils/audioManager';
 
-export default function OpeningScreen() {
+export default function OpeningScreen({ onOpen }) {
   const [isOpen, setIsOpen] = useState(false);
   const [doorsActive, setDoorsActive] = useState(true);
 
   useEffect(() => {
-    // Body scrolling stays locked until the tap
+    // Body scrolling stays locked until the visitor taps to open
     document.body.classList.add('locked');
     return () => {
       document.body.classList.remove('locked');
@@ -17,14 +17,16 @@ export default function OpeningScreen() {
   const handleOpen = () => {
     if (isOpen) return;
 
+    // Start background music seamlessly
     audioManager.play(INVITATION_CONFIG.music.audioSrc);
     setIsOpen(true);
+    if (onOpen) onOpen();
 
-    // Unlock body scrolling and trigger orchestrated reveal
+    // Trigger door opening and orchestrated letter-by-letter reveal
     document.body.classList.remove('locked');
     document.body.classList.add('opened', 'go');
 
-    // After the 1.9s slide animation completes, remove pointer-events so page is usable
+    // After the 1.9s slide animation completes, remove pointer events
     setTimeout(() => {
       setDoorsActive(false);
     }, 2100);
@@ -32,7 +34,7 @@ export default function OpeningScreen() {
 
   return (
     <>
-      {/* Two door panels (left & right) sliding outward on tap */}
+      {/* Two Deep Burgundy Door Panels sliding outwards */}
       <div
         id="doors"
         className={`doors ${doorsActive ? 'active' : ''} ${isOpen ? 'open' : ''}`}
@@ -42,25 +44,36 @@ export default function OpeningScreen() {
         <div className="door r" />
       </div>
 
-      {/* First Screen: Monogram + Tap To Open */}
+      {/* Centered Circular Monogram Seal + Tap To Open */}
       <div id="seal" className={`seal ${isOpen ? 'gone' : ''}`}>
         <button
           type="button"
           id="openBtn"
-          aria-label="Open the invitation"
+          aria-label="Open the engagement invitation"
           onClick={handleOpen}
         >
-          <div className="ar bis" lang="ar" dir="rtl">
+          {/* Gold Arabic Bismillah */}
+          <div className="ar seal-bis" lang="ar" dir="rtl">
             {INVITATION_CONFIG.bismillah.arabic}
           </div>
+
+          {/* Centered Monogram Ring with A, 2 Interlocking Rings, and N */}
           <div className="ring">
-            <span>
-              {INVITATION_CONFIG.monogramBride}
-              <i>&amp;</i>
-              {INVITATION_CONFIG.monogramGroom}
+            <span className="ring-content">
+              <span>{INVITATION_CONFIG.monogramBride}</span>
+              <img
+                src={`${import.meta.env.BASE_URL}images/rings-seal-gold.png`}
+                alt="Interlocking Rings"
+                className="monogram-rings"
+                width={30}
+                height={30}
+              />
+              <span>{INVITATION_CONFIG.monogramGroom}</span>
             </span>
           </div>
-          <div className="tap">Tap to open</div>
+
+          {/* Tap to open text */}
+          <div className="tap">TAP TO OPEN</div>
         </button>
       </div>
     </>

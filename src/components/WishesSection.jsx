@@ -107,7 +107,7 @@ export default function WishesSection() {
       }
 
       triggerCelebration(35);
-      setSuccessMsg(result.message || 'Jazakallahu khairan for your duas and warm wishes!');
+      setSuccessMsg(result.message || 'Thank you for your warm wishes!');
       setName('');
       setMessage('');
       setRelation('Well-wisher');
@@ -212,9 +212,6 @@ export default function WishesSection() {
           >
             Your good wishes will forever be a cherished part of our beginning.
           </p>
-
-          <p className="ar dua-ar" lang="ar" dir="rtl">{INVITATION_CONFIG.blessingDua.arabic}</p>
-          <p className="verse-en dua-en">{INVITATION_CONFIG.blessingDua.english}</p>
 
           {/* Form */}
           <form onSubmit={handleSubmit} style={{ textAlign: 'left' }}>
@@ -408,7 +405,7 @@ export default function WishesSection() {
                 marginBottom: '1.5rem',
               }}
             >
-              Duas & Wishes ({wishes.length})
+              Wishes ({wishes.length})
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>

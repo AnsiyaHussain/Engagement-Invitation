@@ -33,9 +33,17 @@ class RomanticAudioManager {
     if (this.audioElement) return this.audioElement;
 
     const audio = new Audio(audioSrc);
-    audio.preload = 'none';
+    audio.preload = 'auto';
     audio.loop = true;
-    audio.volume = this.volume;
+    audio.playsInline = true;
+    audio.setAttribute('playsinline', 'true');
+    audio.setAttribute('webkit-playsinline', 'true');
+    
+    try {
+      audio.volume = this.volume;
+    } catch {
+      // iOS Safari does not allow programmatically modifying volume (hardware buttons only)
+    }
     audio.muted = this.isMuted;
 
     audio.addEventListener('playing', () => {
@@ -43,14 +51,29 @@ class RomanticAudioManager {
       this.mode = 'file';
       this.notify();
     });
+
     audio.addEventListener('pause', () => {
       this.isPlaying = false;
       this.notify();
     });
+
+    // Native loop fallback for mobile browsers (Safari / Chrome power save modes)
+    audio.addEventListener('ended', () => {
+      try {
+        audio.currentTime = 0;
+        audio.play().catch(() => {});
+      } catch {
+        // Ignored
+      }
+    });
+
+    // Graceful error handling for missing/unsupported audio or offline states
     audio.addEventListener('error', () => {
       this.isPlaying = false;
       this.mode = 'idle';
-      console.warn('Background music could not be loaded or decoded.', audio.error);
+      const code = audio.error ? audio.error.code : 'unknown';
+      const msg = audio.error ? audio.error.message : '';
+      console.warn(`[Audio] Background music could not be loaded (code: ${code}, ${msg}). Invitation continues gracefully.`);
       this.notify();
     });
 
@@ -119,7 +142,11 @@ class RomanticAudioManager {
   setVolume(vol) {
     this.volume = Math.max(0, Math.min(1, vol));
     if (this.audioElement) {
-      this.audioElement.volume = this.volume;
+      try {
+        this.audioElement.volume = this.volume;
+      } catch {
+        // iOS Safari read-only volume handled gracefully
+      }
     }
     this.notify();
   }

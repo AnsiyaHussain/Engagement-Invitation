@@ -1,50 +1,37 @@
-import { Fragment } from 'react';
-import { motion } from 'framer-motion';
 import { INVITATION_CONFIG } from '../config/invitationConfig';
-
-function Person({ data }) {
-  return (
-    <div className="fam">
-      <p className="fam-name">{data.name}</p>
-      {data.lineage.map((row, i) => (
-        <Fragment key={i}>
-          <p className="fam-rel">{row.relation}</p>
-          <div className="fam-people">
-            {row.people.map((person, j) => (
-              <Fragment key={person}>
-                {j > 0 && <span className="fam-amp" aria-hidden="true">&amp;</span>}
-                <span className="fam-person">{person}</span>
-              </Fragment>
-            ))}
-          </div>
-          {i < data.lineage.length - 1 && <div className="gold-dot" aria-hidden="true" />}
-        </Fragment>
-      ))}
-    </div>
-  );
-}
 
 export default function FamiliesSection() {
   const { families } = INVITATION_CONFIG;
 
   return (
-    <section id="families" className="section-container families-section">
-      <motion.div
-        className="families-wrap"
-        initial={{ opacity: 0, y: 14 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <p className="label-caps">{families.heading}</p>
-        <div className="gold-rule" aria-hidden="true" />
+    <section id="families" className="page">
+      <p className="lb">{families.heading}</p>
 
-        <Person data={families.bride} />
+      <div className="family-details-grid">
+        {/* Left Column: Bride */}
+        <div className="bride-family">
+          <h3>Ansiya Hussain</h3>
+          <em>daughter of</em>
+          <p>
+            Hussain <b>&amp;</b> Fathima Beevi
+          </p>
+        </div>
 
-        <div className="fam-between" aria-hidden="true">&amp;</div>
-
-        <Person data={families.groom} />
-      </motion.div>
+        {/* Right Column: Groom */}
+        <div className="groom-family">
+          <h3>Nihal</h3>
+          <em>grandson of</em>
+          <p>
+            Late Sunnasahib
+            <br />
+            Ex. MP <b>&amp;</b> Pyarijan
+          </p>
+          <em>son of</em>
+          <p>
+            Ullas <b>&amp;</b> Gulrukh
+          </p>
+        </div>
+      </div>
     </section>
   );
 }

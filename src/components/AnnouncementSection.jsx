@@ -1,15 +1,15 @@
 import { INVITATION_CONFIG } from '../config/invitationConfig';
 import CountdownSection from './CountdownSection';
 
-// Timing (seconds) of the letter-by-letter name reveal
-const NAME_START = 1.5;
-const LETTER_STAGGER = 0.16;
-const GAP_BETWEEN_NAMES = 0.9;
+// Letter-by-letter stagger timing
+const NAME_START = 1.6;
+const LETTER_STAGGER = 0.15;
+const GAP_AFTER_BRIDE = 1.0;
 
-function AnimatedName({ text, className, start, label }) {
+function AnimatedLetters({ text, className, start, label }) {
   return (
     <div
-      className={`name ${className}`}
+      className={`nm ${className}`}
       {...(label ? { role: 'heading', 'aria-level': 1, 'aria-label': label } : { 'aria-hidden': 'true' })}
     >
       {[...text].map((char, index) => (
@@ -28,49 +28,97 @@ function AnimatedName({ text, className, start, label }) {
 
 export default function AnnouncementSection() {
   const {
-    dateDisplay, timeDisplay, venueName, brideShortName, groomName,
-    bismillah, blessingHeader, invitationLines,
+    dateDisplay,
+    timeDisplay,
+    brideShortName,
+    groomName,
+    bismillah,
+    blessingIntro,
+    invitationNote,
   } = INVITATION_CONFIG;
 
-  const nihalStart = NAME_START + (brideShortName.length - 1) * LETTER_STAGGER + GAP_BETWEEN_NAMES;
+  const ringsDelay = (NAME_START + (brideShortName.length - 1) * LETTER_STAGGER + 0.35).toFixed(2);
+  const groomStart = NAME_START + (brideShortName.length - 1) * LETTER_STAGGER + GAP_AFTER_BRIDE;
 
   return (
-    <section id="announcement" className="hero">
-      <div className="stack">
-        {/* Bismillah, first thing revealed */}
-        <p className="ar bis fade bis-hero" lang="ar" dir="rtl">{bismillah.arabic}</p>
-        <p className="ref fade bis-en">{bismillah.english}</p>
+    <main className="page" id="p1">
+      {/* Arabic Bismillah */}
+      <p className="ar bis f" style={{ '--t': '0.9s' }} lang="ar" dir="rtl">
+        {bismillah.arabic}
+      </p>
 
-        <div className="blessing-spacer" />
-        <p className="blessing fade">{blessingHeader}</p>
-        <div className="blessing-spacer" />
+      {/* English Meaning */}
+      <p className="en f" style={{ '--t': '1.0s' }}>
+        {bismillah.english}
+      </p>
 
-        {/* Names, letter by letter */}
-        <AnimatedName
-          text={brideShortName}
-          className="name-bride"
-          start={NAME_START}
-          label={`${brideShortName} and ${groomName}`}
+      {/* Delicate Champagne-Gold Rule */}
+      <div className="rule f" style={{ '--t': '1.1s' }} aria-hidden="true" />
+
+      {/* Blessings Subtitle */}
+      <p className="lb f" style={{ '--t': '1.2s' }}>
+        {blessingIntro}
+      </p>
+
+      <div style={{ height: '2svh' }} />
+
+      {/* Bride Name: Ansiya */}
+      <AnimatedLetters
+        text={brideShortName}
+        className="name-bride"
+        start={NAME_START}
+        label={`${brideShortName} and ${groomName}`}
+      />
+
+      {/* Two Elegant Interlocking Gold Wedding Rings (Replaces the ampersand / AND) */}
+      <div
+        className="and-rings f"
+        style={{ '--t': `${ringsDelay}s` }}
+        aria-hidden="true"
+      >
+        <img
+          src={`${import.meta.env.BASE_URL}rings.png`}
+          alt="Interlocking Wedding Rings"
+          className="hero-rings"
+          width={64}
+          height={64}
         />
-        <p className="and fade" aria-hidden="true">and</p>
-        <AnimatedName text={groomName} className="name-groom" start={nihalStart} />
-
-        <div className="rule" aria-hidden="true" />
-
-        <p className="invite fade">
-          {invitationLines[0]}
-          <br />
-          {invitationLines[1]}
-        </p>
-
-        <p className="date fade">{dateDisplay}</p>
-        <p className="time fade">{timeDisplay}</p>
-        <p className="time time-venue fade">{venueName}</p>
-
-        <div className="count-fade fade" aria-label="Countdown to the ceremony">
-          <CountdownSection />
-        </div>
       </div>
-    </section>
+
+      {/* Groom Name: Nihal */}
+      <AnimatedLetters
+        text={groomName}
+        className="name-groom"
+        start={groomStart}
+      />
+
+      {/* Delicate Champagne-Gold Rule */}
+      <div className="rule f" style={{ '--t': '3.9s' }} aria-hidden="true" />
+
+      {/* Warm Invitation Line */}
+      <p className="inv f" style={{ '--t': '4.1s' }}>
+        {invitationNote}
+      </p>
+
+      {/* Date */}
+      <p className="dt f" style={{ '--t': '4.3s' }}>
+        {dateDisplay}
+      </p>
+
+      {/* Time & Venue */}
+      <p className="tm f" style={{ '--t': '4.5s' }}>
+        {timeDisplay}
+      </p>
+
+      {/* Live Countdown */}
+      <div className="f" style={{ '--t': '4.8s' }}>
+        <CountdownSection />
+      </div>
+
+      {/* Swipe up hint to Page 2 */}
+      <a className="hint f" style={{ '--t': '5.2s' }} href="#p2">
+        Swipe up
+      </a>
+    </main>
   );
 }

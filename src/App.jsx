@@ -1,38 +1,47 @@
-import { lazy, Suspense } from 'react';
+import { useState } from 'react';
+import OuterFrame from './components/OuterFrame';
+import PetalShower from './components/PetalShower';
+import NavDots from './components/NavDots';
 import OpeningScreen from './components/OpeningScreen';
 import AnnouncementSection from './components/AnnouncementSection';
+import DetailsSection from './components/DetailsSection';
+import WishesSheet from './components/WishesSheet';
 import FloatingMusicPlayer from './components/FloatingMusicPlayer';
 
-// Production Code Splitting: Lazy-load below-the-fold sections
-const VerseSection = lazy(() => import('./components/VerseSection'));
-const FamiliesSection = lazy(() => import('./components/FamiliesSection'));
-const EventDetailsSection = lazy(() => import('./components/EventDetailsSection'));
-const WishesSection = lazy(() => import('./components/WishesSection'));
-const ClosingSection = lazy(() => import('./components/ClosingSection'));
-
 export default function App() {
+  const [isWishesOpen, setIsWishesOpen] = useState(false);
+
   return (
     <div className="invitation-app">
-      {/* Section 1: Opening Screen / A & N Monogram Reveal & Doors */}
+      {/* Fixed Luxury Champagne-Gold Outer Frame with Diamond Corners */}
+      <OuterFrame />
+
+      {/* Gentle Floating Falling Petals Canvas */}
+      <PetalShower />
+
+      {/* Two-Page Indicator Navigation Dots */}
+      <NavDots />
+
+      {/* Full-Screen Opening Doors & Monogram with 2 Interlocking Rings */}
       <OpeningScreen />
 
-      {/* Floating Circular Background Music Player */}
+      {/* Floating Music Player */}
       <FloatingMusicPlayer />
 
       {/* Main Invitation Sections */}
-      <main>
-        {/* Editorial Ceremony Announcement & Integrated Countdown */}
+      <div className="pages-scroll-container">
+        {/* Page 1: Ceremony Announcement, Ansiya & Nihal with 2 Rings, Countdown */}
         <AnnouncementSection />
 
-        {/* Below-the-fold sections with lightweight Suspense boundaries */}
-        <Suspense fallback={null}>
-          <VerseSection />
-          <FamiliesSection />
-          <EventDetailsSection />
-          <WishesSection />
-          <ClosingSection />
-        </Suspense>
-      </main>
+        {/* Page 2: Quran Verse, Families, Venue, Directions & Wishes Buttons */}
+        <DetailsSection onOpenWishes={() => setIsWishesOpen(true)} />
+      </div>
+
+      {/* Interactive Slide-Up Wishes Sheet */}
+      <WishesSheet
+        isOpen={isWishesOpen}
+        onClose={() => setIsWishesOpen(false)}
+      />
     </div>
   );
 }

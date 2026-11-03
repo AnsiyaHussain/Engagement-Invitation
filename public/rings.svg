@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none" stroke="currentColor" stroke-width="18" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Diamond Gemstone on Top of Right Ring -->
+  <polygon points="336,36 410,36 434,80 397,120 335,120 312,80" />
+  <!-- Left Plain Ring with Gap at Top Intersection -->
+  <path d="M 278.8 201.4 A 160 160 0 1 1 220.1 170.2" />
+  <!-- Right Diamond Ring with Gap at Bottom Intersection -->
+  <path d="M 299.5 358.4 A 131 131 0 1 1 360.4 375.9" />
+</svg>

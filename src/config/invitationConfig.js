@@ -7,29 +7,27 @@
  */
 
 const MUSIC_TRACK = {
-  title: "Romantic Piano Serenade",
+  title: "Love Story – Indila (Piano Cover)",
   src: `${import.meta.env.BASE_URL}audio/music-1.mp3`,
 };
 
 export const INVITATION_CONFIG = {
   // --- Couple Details ---
-  brideName: "Ansiya Hussain",     // full name (used in the families section)
-  brideShortName: "Ansiya",          // name shown in the big animated title
+  brideName: "Ansiya Hussain",
+  brideShortName: "Ansiya",
   groomName: "Nihal",
-  monogramBride: "A",              // letters inside the opening monogram
+  monogramBride: "A",
   monogramGroom: "N",
 
   // --- Event Details ---
-  eventTitle: "Engagement Ceremony",
-  blessingHeader: "With the blessings of our families",
-  invitationLines: ["We warmly invite you to celebrate our ", "engagement"],
-
-  // Prominent heartfelt invitation message
-  personalMessage: "Your presence and duas will make this special occasion even more beautiful.",
+eventTitle: "Engagement Ceremony",
+blessingIntro: "Together with our families we cordially invite you to our engagement",
+invitationNote: "We would be delighted to have you join us on our special day.",
 
   // --- Date & Time ---
   dateDisplay: "Sunday, 29 November 2026",
-  timeDisplay: "5:00 PM \u2013 7:00 PM",
+  timeDisplay: "5:00 PM – 7:00 PM · MANKARA FARMS",
+  timeOnlyDisplay: "5:00 PM – 7:00 PM",
   timezoneDisplay: "India Standard Time (IST)",
 
   // Target timestamp for accurate live countdown in Asia/Kolkata (UTC+05:30)
@@ -37,47 +35,41 @@ export const INVITATION_CONFIG = {
 
   // --- Venue & Directions ---
   venueName: "Mankara Farms",
-  venueAddress: "Puthenchira PO, Near Thachapilly Bridge, Kombathukadavu, Thrissur, Kerala 680682",
+  venueAddress: "Puthenchira PO, near Thachapilly Bridge\nKombathukadavu, Thrissur, Kerala 680682",
+  venueAddressLine1: "Puthenchira PO, near Thachapilly Bridge",
+  venueAddressLine2: "Kombathukadavu, Thrissur, Kerala 680682",
 
   // Confirmed Google venue link provided by the couple
   googleMapsUrl: "https://www.google.com/maps/dir//Mankara+Farms,+Puthenchira+PO+Near+Thachapilly+Bridge+Kombathukadavu,+Kombathukadavu-Kodungallur+Rd,+Thrissur,+Keralam+680682/@10.2702703,76.2303966,14z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3b081de8c40016d1:0x61f652e8a4e5933f!2m2!1d76.229662!2d10.2419542?entry=ttu&g_ep=EgoyMDI2MTAyOC4wIKXMDSoASAFQAw%3D%3D",
 
-  // --- Islamic text (Arabic is rendered in the Amiri font, right-to-left) ---
+  // --- Islamic Text ---
   bismillah: {
     // arabic: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
-    english: "In the name of Allah, the Most Gracious, the Most Merciful",
+    english: "N THE NAME OF ALLAH, THE MOST GRACIOUS, THE MOST MERCIFUL",
   },
   verse: {
     arabic: "وَخَلَقْنَاكُمْ أَزْوَاجًا",
     english: "And We created you in pairs.",
-    reference: "Surah An-Naba \u00b7 78:8",
+    reference: "SURAH AN-NABA · 78:8",
   },
   blessingDua: {
     // arabic: "بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ",
-    // english: "May Allah bless you both, shower His blessings upon you, and unite you in goodness.",
-  },
-  closingVerse: {
-    arabic: "وَالَّذِينَ يَقُولُونَ رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا",
-    english: "Our Lord, grant us from among our spouses and offspring comfort to our eyes, and make us a leader for the righteous.",
-    reference: "Surah Al-Furqan \u00b7 25:74",
   },
 
   // --- Families ---
-  // For the groom, the grandparents are listed FIRST, then the parents.
   families: {
-    heading: "Together with their families",
+    heading: "TOGETHER WITH THEIR FAMILIES",
     bride: {
       name: "Ansiya Hussain",
-      lineage: [
-        { relation: "daughter of", people: ["Hussain", "Fathima Beevi"] },
-      ],
+      relation: "daughter of",
+      parents: "Hussain & Fathima Beevi",
     },
     groom: {
       name: "Nihal",
-      lineage: [
-        { relation: "grandson of", people: ["Late Sunnasahib, Ex. MP", "Pyarijan"] },
-        { relation: "son of", people: ["Ullas", "Gulrukh"] },
-      ],
+      grandRelation: "grandson of",
+      grandparents: "Late Sunnasahib, Ex. MP & Pyarijan",
+      parentRelation: "son of",
+      parents: "Ullas & Gulrukh",
     },
   },
 
@@ -86,13 +78,11 @@ export const INVITATION_CONFIG = {
     tracks: [MUSIC_TRACK],
     audioSrc: MUSIC_TRACK.src,
     trackTitle: MUSIC_TRACK.title,
-    defaultVolume: 0.28,
+    defaultVolume: 0.3,
   },
 
   // --- Closing Section ---
   closing: {
-    heading: "Jazakallahu Khairan",
-    dateSummary: "Sunday \u00b7 29 November 2026",
-    farewell: "Insha\u2019Allah, your presence and duas will make this special occasion even more beautiful."
-  }
+    farewell: "Jazakallahu khairan · Ansiya & Nihal",
+  },
 };

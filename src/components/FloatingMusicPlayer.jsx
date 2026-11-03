@@ -38,12 +38,12 @@ export default function FloatingMusicPlayer() {
     <div
       style={{
         position: 'fixed',
-        bottom: '24px',
-        right: '24px',
-        zIndex: 900,
+        bottom: '22px',
+        left: '22px',
+        zIndex: 50,
       }}
     >
-      {/* Volume & Settings Popup (Minimal Outlined Panel) */}
+      {/* Volume & Settings Popup */}
       <AnimatePresence>
         {showControls && (
           <motion.div
@@ -53,14 +53,16 @@ export default function FloatingMusicPlayer() {
             transition={{ duration: 0.2 }}
             style={{
               position: 'absolute',
-              bottom: '54px',
-              right: 0,
-              width: '200px',
-              backgroundColor: 'var(--paper)',
-              border: '1px solid var(--line)',
+              bottom: '50px',
+              left: 0,
+              width: '210px',
+              backgroundColor: 'rgba(255, 249, 245, 0.97)',
+              backdropFilter: 'blur(8px)',
+              border: '1px solid var(--gold)',
+              boxShadow: '0 8px 24px rgba(100, 27, 54, 0.12)',
               borderRadius: 0,
               padding: '1rem',
-              color: 'var(--ink)',
+              color: 'var(--wine)',
             }}
           >
             <div
@@ -68,9 +70,9 @@ export default function FloatingMusicPlayer() {
                 fontFamily: 'var(--font-body)',
                 fontSize: '0.65rem',
                 textTransform: 'uppercase',
-                letterSpacing: '0.16em',
+                letterSpacing: '0.18em',
                 color: 'var(--gold)',
-                marginBottom: '0.4rem',
+                marginBottom: '0.35rem',
               }}
             >
               MUSIC
@@ -78,8 +80,8 @@ export default function FloatingMusicPlayer() {
             <div
               style={{
                 fontFamily: 'var(--font-serif)',
-                fontSize: '0.92rem',
-                color: 'var(--ink)',
+                fontSize: '0.88rem',
+                color: 'var(--wine)',
                 marginBottom: '0.8rem',
                 whiteSpace: 'nowrap',
                 overflow: 'hidden',
@@ -97,7 +99,7 @@ export default function FloatingMusicPlayer() {
                 style={{
                   background: 'none',
                   border: 'none',
-                  color: 'var(--ink)',
+                  color: 'var(--wine)',
                   cursor: 'pointer',
                   padding: 0,
                   display: 'flex',
@@ -118,7 +120,7 @@ export default function FloatingMusicPlayer() {
                   accentColor: 'var(--gold)',
                   cursor: 'pointer',
                   height: '2px',
-                  backgroundColor: 'var(--line)',
+                  backgroundColor: 'rgba(184, 137, 63, 0.3)',
                 }}
                 aria-label="Volume slider"
               />
@@ -127,35 +129,33 @@ export default function FloatingMusicPlayer() {
         )}
       </AnimatePresence>
 
-      {/* Main Music Control: Small Outlined Circle */}
+      {/* Main Music Control Button */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
         <button
           type="button"
           onClick={handleTogglePlay}
           aria-label={audioState.isPlaying ? 'Pause music' : 'Play music'}
           style={{
-            width: '44px',
-            height: '44px',
+            width: '42px',
+            height: '42px',
             borderRadius: '50%',
-            border: '1px solid var(--line)',
-            backgroundColor: 'var(--paper)',
-            color: 'var(--ink)',
+            border: '1px solid var(--gold)',
+            backgroundColor: 'rgba(255, 249, 245, 0.92)',
+            backdropFilter: 'blur(6px)',
+            color: 'var(--wine)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             cursor: 'pointer',
-            transition: 'border-color 0.25s ease, background-color 0.25s ease',
+            transition: 'all 0.25s ease',
             outline: 'none',
+            boxShadow: '0 4px 16px rgba(100, 27, 54, 0.08)',
           }}
-          onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--gold)'}
-          onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--line)'}
-          onFocus={e => e.currentTarget.style.borderColor = 'var(--gold)'}
-          onBlur={e => e.currentTarget.style.borderColor = 'var(--line)'}
         >
           {audioState.isPlaying ? (
-            <Pause size={15} style={{ color: 'var(--ink)' }} />
+            <Pause size={15} style={{ color: 'var(--wine)' }} />
           ) : (
-            <Play size={15} style={{ color: 'var(--ink)', marginLeft: '2px' }} />
+            <Play size={15} style={{ color: 'var(--wine)', marginLeft: '2px' }} />
           )}
         </button>
 
@@ -168,17 +168,19 @@ export default function FloatingMusicPlayer() {
             width: '26px',
             height: '26px',
             borderRadius: '50%',
-            border: '1px solid var(--line)',
-            backgroundColor: 'var(--paper)',
+            border: '1px solid var(--gold)',
+            backgroundColor: 'rgba(255, 249, 245, 0.92)',
+            backdropFilter: 'blur(6px)',
             color: 'var(--gold)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             cursor: 'pointer',
             padding: 0,
+            boxShadow: '0 2px 8px rgba(100, 27, 54, 0.06)',
           }}
         >
-          <SlidersHorizontal size={12} />
+          <SlidersHorizontal size={11} />
         </button>
       </div>
     </div>
