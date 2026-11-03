@@ -8,6 +8,7 @@
     "server": "node server/index.js",
     "client": "vite",
     "build": "vite build",
+    "generate:og": "node scripts/generate-preview.js",
     "lint": "oxlint",
     "preview": "vite preview"
   },
